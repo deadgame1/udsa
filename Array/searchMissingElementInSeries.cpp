@@ -9,6 +9,8 @@ int array[9] = {1,2,3,4,5,6,7,9,10};
  * using sum of n natural numbers.
  * eg - 1,2,3,4,5,6,7,9,10,11
  * missing element = 8
+ * 
+ * SORTED LIST
  * @return int 
  */
 int findSingleMissing(){
@@ -36,6 +38,7 @@ int array2[9] = {4,5,6,7,8,9,11,12,13};
  * eg - 4,5,6,7,8,9,11,12,13
  * missing element = 10
  * 
+ * SORTED LIST
  * @return int 
  */
 int findSingleMissingElement2(){
@@ -58,6 +61,7 @@ int C[8] = {6,7,8,9,12,13,14,16};
  *           0,1,2,3,4 
  * 10,11 are missing consecutively, and then 15 is missing
  * 
+ * SORTED LIST
  * @return void 
  */
 void findMultipleMissingElements(){
@@ -78,15 +82,15 @@ void findMultipleMissingElements(){
  * using hash table.
  * 
  * Time taken - O(n)
- * 
+ * Unsorted list
  * @return 
  */
 void findMultipleMissingInUnsortedList(){
     int C[9]={6,9,13,2,4,7,10,15,5};
-    int l=2; //can find low using array.min()
-    int high=15; //can find high using array.max()
-    int n=9; //can find high using array.getLength()
-    int H[high] = {0};
+    int l=2; //can find low of unsorted list using array.min()
+    int high=15; //can find high of unsorted list using array.max()
+    int n=9; //can find no of elements of list using array.getLength()
+    int H[high+1] = {0};
 
     for(int i=0;i<n;i++){
         H[C[i]] = 1;
