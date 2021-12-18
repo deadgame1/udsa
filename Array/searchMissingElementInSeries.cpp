@@ -82,13 +82,26 @@ void findMultipleMissingElements(){
  * @return 
  */
 void findMultipleMissingInUnsortedList(){
+    int C[9]={6,9,13,2,4,7,10,15,5};
+    int l=2; //can find low using array.min()
+    int high=15; //can find high using array.max()
+    int n=9; //can find high using array.getLength()
+    int H[high] = {0};
 
+    for(int i=0;i<n;i++){
+        H[C[i]] = 1;
+    }
+    for(int j=l;j<high;j++){
+        if(H[j] == 0){
+            cout<<j<<endl;
+        }
+    }
 
     return;
 }
 
 int main(){
-    findMultipleMissingElements();
+    findMultipleMissingInUnsortedList();
 
     return 0;
 }
