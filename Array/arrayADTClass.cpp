@@ -46,14 +46,24 @@ public:
     Array* setIntersectionForUnsortedList(Array arr2);
     Array* setDifference(Array arr2);
     Array* setDifferenceForUnsortedList(Array arr2);
+    int getLength(){
+        return length;
+    }
 };
 
 void Array::display()
 {
+    if(length <=0){
+        cout<<"Empty array"<<endl;
+        return;
+    }
     int i;
-    cout<<"Elements of the array are"<<endl;
+    cout<<"Elements of the array are - ";
     for(i=0; i<length; i++)
-        cout<<A[i]<<" ";
+        if(i<length-1)
+            cout<<A[i]<<" ";
+        else
+            cout<<A[i]<<endl;
 }
 void Array::append(int x)
 {
@@ -140,7 +150,7 @@ void Array::reverseWithAux()
         A[i] = B[i];
     }
 }
-void Array::swap(int *a, int *b) //check this function
+void Array::swap(int *a, int *b)
 {
     int temp = *a;
     *a = *b;
@@ -224,7 +234,7 @@ Array* Array::merge(Array arr2)
 
     return arr3;
 }
-Array* Array::setUnion(Array arr2) //check this function
+Array* Array::setUnion(Array arr2)
 {
     Array *arr3 = new Array(size + arr2.size);
     int i,j,k;
@@ -379,13 +389,81 @@ Array* Array::setDifferenceForUnsortedList(Array arr2)
 }
 
 int main(){
-    Array *arr = new Array(10);
-    arr->append(3);
-    arr->append(5);
-    arr->append(7);
-    arr->append(9);
+    int sz;
+    cout<<"Please enter size of array"<<endl;
+    cin>>sz;
+    Array *arr = new Array(sz);
+    //arr->append(2);
+    //arr->append(4);
+    //arr->append(6);
+    //arr->append(8);
 
-    arr->display();
+    //Array *arr2 = new Array(10);
+    //arr2->append(3);
+    //arr2->append(5);
+    //arr2->append(7);
+    //arr2->append(9);
+
+    //Array *arr3 = arr->setUnion(*arr2);
+
+    //arr3->display();
+
+    //cout<<arr3->getLength()<<endl;
+
+    int choice = 0;
+    do{
+        cout<<"Please enter your choice"<<endl;
+        cout<<"1. Display"<<endl;
+        cout<<"2. Append"<<endl;
+        cout<<"3. Insert"<<endl;
+        cout<<"4. Set"<<endl;
+        cout<<"5. Get"<<endl;
+        cout<<"6. Delete"<<endl;
+        cout<<"7. Exit"<<endl;
+
+        cin>>choice;
+        int x, index;
+        switch (choice)
+        {
+        case 1:
+            arr->display();
+            break;
+        case 2:
+            cout<<"Enter value to append"<<endl;
+            cin>>x;
+            arr->append(x);
+            break;
+        case 3:
+            cout<<"Enter value to insert"<<endl;
+            cin>>x;
+            cout<<"Enter index at which to insert"<<endl;
+            cin>>index;
+            arr->insert(x,index);
+            break;
+        case 4:
+            cout<<"Enter value to set"<<endl;
+            cin>>x;
+            cout<<"Enter index at which to set"<<endl;
+            cin>>index;
+            arr->set(index,x);
+            break;
+        case 5:
+            cout<<"Enter index whose value is required"<<endl;
+            cin>>index;
+            cout<<arr->get(index)<<endl;
+            break;
+        case 6:
+            cout<<"Enter index whose value is to be deleted"<<endl;
+            cin>>index;
+            arr->del(index);
+            break;
+        case 7:
+            cout<<"Bye bye"<<endl;
+            break;
+        default:
+            break;
+        }
+    }while(choice < 7);
 
     return 0;    
 }
