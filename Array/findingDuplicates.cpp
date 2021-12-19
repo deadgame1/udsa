@@ -34,8 +34,54 @@ void findDuplicatesAndCountDuplicates(){
         }
     }
 }
+
+/**
+ * @brief finding duplicates and count in an unsorted list
+ * 
+ */
+void findingDuplicatesAndCountInUnsortedList(){
+    int n = 10; //no of elements suppose.
+    int A[n]={8,1,15,8,5,3,15,1,15,1}; //unsorted list
+    int i,j;
+    for(i=0;i<n-1;i++){
+        int count = 1;
+        if(A[i] != -1){
+            for(j=i+1;j<n;j++){
+                if(A[i] == A[j]){
+                    A[j] = -1;
+                    count++;
+                }
+            }
+            if(count > 1){
+                cout<<A[i]<<" - repeating number, with count = "<<count<<endl;
+            }
+        }
+    }
+}
+
+/**
+ * @brief finding duplicates and count in an unsorted list using Hashing
+ * 
+ */
+void findingDuplicatesAndCountInUnsortedListUsingHashing(){
+    int n = 10; //no of elements suppose.
+    int A[n]={8,1,15,8,5,3,15,1,15,1}; //unsorted list
+    int maxElementInA = 15; //hardcoded here, but can be fetched from max() function of array
+    int H[maxElementInA+1] = {0};
+
+    int i,j;
+    for(i=0;i<n;i++){
+        H[A[i]]++;
+    }
+    for(j=0;j<maxElementInA+1;j++){
+        if(H[j] > 1){
+            cout<<j<<" - repeating number, with count = "<<H[j]<<endl;
+        }
+    }
+}
+
 int main(){
-    findDuplicatesAndCountDuplicates();
+    findingDuplicatesAndCountInUnsortedListUsingHashing();
 
     return 0;
 }
