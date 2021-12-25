@@ -135,10 +135,99 @@ int countWordsInAString(char* str){
     return wordCount;
 }
 
+/**
+ * @brief O(n^2) operation.
+ * 
+ * @return void 
+ */
+void findingDuplicatesInAString(char* str){
+    int i=0;
+    int j=0;
+    while(str[i]!='\0')
+    {
+        if(str[i] != -1){
+            for(j=i+1;str[j]!='\0';j++){
+                if(str[i] == str[j]){
+                    cout<<str[i]<<" - is repeating"<<endl;
+                    str[j] = -1;
+                }
+            }
+        }
+        
+        i++;
+    }
+
+    return;
+}
+
+/**
+ * @brief O(n) operation using hash table
+ * 
+ * @return void 
+ */
+void findingDuplicatesInALowerCaseStringUsingHashTable(char* str){
+    int i,j;
+    int hash[26] = {0};
+    for(i=0;str[i]!='\0';i++)
+    {
+        hash[str[i]-97]++;
+    }
+
+    char c;
+    for(j=0;j<26;j++){
+        if(hash[j] > 1){
+            c=j+97;
+            cout<<c<<" - is repeating character"<<endl;
+        }
+    }
+
+    return;
+}
+
+/**
+ * @brief O(n) operation using hash table
+ * works for mixed case (uppercase+lowercase)
+ * 
+ * uppercase 65-90
+ * lowercase 97-122
+ * number - 48-57
+ * 
+ * @return void 
+ */
+void findingDuplicatesInAStringUsingHashTable(char* str){
+    int i,j;
+    int sizeOfHashTable = 52;
+    int hash[sizeOfHashTable] = {0};
+    for(i=0;str[i]!='\0';i++)
+    {
+        if(str[i]>=97 && str[i]<=122){
+            hash[str[i]-97]++;
+        }else{
+            hash[str[i]-39]++;
+        }
+    }
+
+    char c;
+    for(j=0;j<sizeOfHashTable;j++){
+        if(hash[j] > 1){
+            if(j>=0 && j <=25){
+                c=j+97;
+                cout<<c<<" - is repeating character"<<endl;
+            }else{
+                c=j+39;
+                cout<<c<<" - is repeating character"<<endl;
+            }
+            
+        }
+    }
+
+    return;
+}
+
 int main(){
-    //char name[] = "Adityarty";
-    char name[] = "Hey how are you doing man ?";
-    cout<<countWordsInAString(name)<<endl;
+    //char name[] = "Aditya";
+    char name[] = "AdityA";
+    findingDuplicatesInAStringUsingHashTable(name);
     // if(validatingString(name) == 1)
     // {
     //     cout<<"Valid"<<endl;
