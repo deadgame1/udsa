@@ -224,10 +224,43 @@ void findingDuplicatesInAStringUsingHashTable(char* str){
     return;
 }
 
+/**
+ * @brief using bitwise operations to find duplicate characters.
+ * works for both cases
+ * caveat - cannot return the count of duplicates right now.
+ */
+void findDuplicatesInAStringUsingBitwiseOperation(char* str)
+{
+    long int H = 0; //long bytes - 8 bytes
+    
+    int i;
+    int x = 0;
+    for(i=0;str[i]!='\0';i++)
+    {
+        x = 1;
+
+        //left shift
+        if(str[i]>=97 && str[i]<=122){
+            x = x << (str[i]-97); 
+        }else{
+            x = x << (str[i]-39);
+        }
+        
+        if((H & x) > 0){ //AND, Masking/checking if bit is already set
+            printf("%c",str[i]);  
+        }else{
+            H = H | x; //OR, Merging, setting the bit
+        }
+    }
+
+    return;
+}
+
 int main(){
     //char name[] = "Aditya";
-    char name[] = "AdityA";
-    findingDuplicatesInAStringUsingHashTable(name);
+    char name[] = "adItyaI";
+    findDuplicatesInAStringUsingBitwiseOperation(name);
+
     // if(validatingString(name) == 1)
     // {
     //     cout<<"Valid"<<endl;
