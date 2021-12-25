@@ -256,10 +256,45 @@ void findDuplicatesInAStringUsingBitwiseOperation(char* str)
     return;
 }
 
+/**
+ * @brief checks if the 2 given strings are anagrams are not
+ * anagrams are 2 pairs of different strings that are made up of exactly same characters.
+ * 
+ */
+void checkAnagram(char* str, char* str2)
+{
+    int i;
+    if(stringlength(str) != stringlength(str2)){
+        cout<<"strings are not Anagrams"<<endl;
+        return;
+    }
+
+    int H[26] = {0};
+    char* A = lowercase(str);
+    char* B = lowercase(str2);
+    for(i=0;A[i]!='\0';i++)
+    {
+        H[A[i]-97]++; 
+    }
+    for(i=0;B[i]!='\0';i++)
+    {
+        H[B[i]-97]--;
+        if(H[B[i]-97] < 0){
+            cout<<"strings are not Anagrams"<<endl;
+            return;
+        }
+    }
+
+    cout<<"strings are Anagrams"<<endl;
+
+    return;
+}
+
 int main(){
     //char name[] = "Aditya";
-    char name[] = "adItyaI";
-    findDuplicatesInAStringUsingBitwiseOperation(name);
+    char name[] = "Aditya";
+    char name2[] = "aytidA";
+    checkAnagram(name,name2);
 
     // if(validatingString(name) == 1)
     // {
