@@ -123,9 +123,22 @@ int countConsonants(char* str){
     return ccount;
 }
 
+int countWordsInAString(char* str){
+    int wordCount = 1;
+    for(int i=0;i<stringlength(str);i++)
+    {
+        if(str[i] == ' ' && str[i-1] != ' '){
+            wordCount++;
+        }
+    }
+
+    return wordCount;
+}
+
 int main(){
-    char name[] = "Adityarty";
-    cout<<countConsonants(name)<<endl;
+    //char name[] = "Adityarty";
+    char name[] = "Hey how are you doing man ?";
+    cout<<countWordsInAString(name)<<endl;
     // if(validatingString(name) == 1)
     // {
     //     cout<<"Valid"<<endl;
