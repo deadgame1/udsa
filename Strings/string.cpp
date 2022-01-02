@@ -260,6 +260,11 @@ void findDuplicatesInAStringUsingBitwiseOperation(char* str)
  * @brief checks if the 2 given strings are anagrams are not
  * anagrams are 2 pairs of different strings that are made up of exactly same characters.
  * 
+ * bitwise operations can be used if no duplicate characters.
+ *
+ * also less efficient solution O(n^2) is just linearly checking both arrays, once you dont find
+ * a match then that means its not an anagram otherwise it is.
+ * 
  */
 void checkAnagram(char* str, char* str2)
 {
@@ -290,11 +295,53 @@ void checkAnagram(char* str, char* str2)
     return;
 }
 
+/**
+ * @brief finding permutations of a string
+ * backtracking with the help of recursion
+ * 
+ */
+void perm(char A[], int k){
+    static char *Res = new char[stringlength(A)];
+    static int *B = new int[stringlength(A)];
+
+    if(k == stringlength(A)){
+        cout<<Res<<endl;        
+    }else{
+        for(int i=0;A[i]!='\0';i++){
+            if(B[i] != 1){
+                Res[k] = A[i];
+                B[i] = 1;
+                perm(A,k+1);
+                B[i] = 0;
+            }
+        }
+    }
+    
+}
+
+/**
+ * @brief permuation function using swapping instead of auxillary arrays
+ * 
+ */
+void perm2(char *A,int low, int high){
+    if(low == high){
+        
+        cout<<A<<endl;
+    }else{
+        for(int i=low;i<=high;i++){
+            swap(A[low],A[i]);
+            perm2(A,low+1,high);
+            swap(A[low],A[i]);
+        }
+    }
+    
+}
+
 int main(){
     //char name[] = "Aditya";
-    char name[] = "Aditya";
+    char name[] = "ABC";
     char name2[] = "aytidA";
-    checkAnagram(name,name2);
+    perm2(name,0,stringlength(name)-1);
 
     // if(validatingString(name) == 1)
     // {
