@@ -16,7 +16,7 @@ class TriDiagonal{
         }
         TriDiagonal(int d){
             this->dimension = d;
-            int totalNonZero = (pow(dimension,2)+dimension)/2;
+            int totalNonZero = 3*dimension - 2; //3n-2
             A = new int[totalNonZero]; //according to total number of elements.
         }
         ~TriDiagonal(){
