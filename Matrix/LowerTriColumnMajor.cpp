@@ -4,7 +4,7 @@
 
 using namespace std;
 
-//Row major mapping
+//Column major mapping
 class LowerTriangular{
     private:
         int dimension;
@@ -33,7 +33,7 @@ void LowerTriangular::display()
     for(int i=1;i<=dimension;i++){
         for(int j=1;j<=dimension;j++){
             if(i>=j) {
-                cout<<A[(i*(i-1))/2 + j-1]<<" ";
+                cout<<A[dimension*(j-1)-((j-2)*(j-1)/2)+(i-j)]<<" ";
             }else {
                 cout<<"0 ";
             }
@@ -44,7 +44,7 @@ void LowerTriangular::display()
 void LowerTriangular::get(int i, int j)
 {
     if(i>=j) {
-        cout<<A[(i*(i-1))/2 + j-1];
+        cout<<A[dimension*(j-1)-((j-2)*(j-1)/2)+(i-j)];
     }else {
         cout<<"0";
     }
@@ -52,7 +52,7 @@ void LowerTriangular::get(int i, int j)
 void LowerTriangular::set(int i, int j, int x)
 {
     if(i>=j) {
-        A[(i*(i-1))/2 + j-1] = x;
+        A[dimension*(j-1)-((j-2)*(j-1)/2)+(i-j)] = x;
     }
 }
 
@@ -121,18 +121,6 @@ int main(){
             break;
         }
     } while (choice >0 && choice <5);
-    
-    // d.set(1,1,1);
-    // d.set(2,1,2);
-    // d.set(2,2,4);
-    // d.set(3,1,6);
-    // d.set(3,2,8);
-    // d.set(3,3,3);
-    // d.set(4,1,5);
-    // d.set(4,2,7);
-    // d.set(4,3,9);
-    // d.set(4,4,4);
-    // d.display();
 
     return 0;
 }
