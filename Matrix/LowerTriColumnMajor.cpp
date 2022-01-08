@@ -60,7 +60,7 @@ void LowerTriangular::randomizeMatrixElements()
 {
     std::random_device rd; // obtain a random number from hardware
     std::mt19937 gen(rd()); // seed the generator
-    std::uniform_int_distribution<> distr(0, 10); // define the range
+    std::uniform_int_distribution<> distr(1, 10); // define the range
     int i, j;
     for(int i=1;i<=dimension;i++){
         for(int j=1;j<=dimension;j++){

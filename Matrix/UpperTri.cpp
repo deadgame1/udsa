@@ -4,22 +4,23 @@
 
 using namespace std;
 
-//Row major mapping
-class LowerTriangular{
+//Row major mapping, Upper Triangular matrix
+//similar formula as column major mappng for lower triangular matrix, only i and j switched
+class UpperTriangular{
     private:
         int dimension;
         int *A;
     public:
-        LowerTriangular(){
+        UpperTriangular(){
             this->dimension = 2;
             A = new int[3];
         }
-        LowerTriangular(int d){
+        UpperTriangular(int d){
             this->dimension = d;
             int totalNonZero = (pow(dimension,2)+dimension)/2;
             A = new int[totalNonZero]; //according to total number of elements.
         }
-        ~LowerTriangular(){
+        ~UpperTriangular(){
             delete []A;
         }
         void display();
@@ -28,12 +29,12 @@ class LowerTriangular{
         void randomizeMatrixElements(); //inserts random elements in matrix
 };
 
-void LowerTriangular::display()
+void UpperTriangular::display()
 {
     for(int i=1;i<=dimension;i++){
         for(int j=1;j<=dimension;j++){
-            if(i>=j) {
-                cout<<A[(i*(i-1))/2 + j-1]<<" ";
+            if(i<=j) {
+                cout<<A[dimension*(i-1)-((i-2)*(i-1)/2)+(j-i)]<<" ";
             }else {
                 cout<<"0 ";
             }
@@ -41,22 +42,22 @@ void LowerTriangular::display()
         cout<<endl;
     }
 }
-void LowerTriangular::get(int i, int j)
+void UpperTriangular::get(int i, int j)
 {
-    if(i>=j) {
-        cout<<A[(i*(i-1))/2 + j-1];
+    if(i<=j) {
+        cout<<A[dimension*(i-1)-((i-2)*(i-1)/2)+(j-i)];
     }else {
         cout<<"0";
     }
 }
-void LowerTriangular::set(int i, int j, int x)
+void UpperTriangular::set(int i, int j, int x)
 {
-    if(i>=j) {
-        A[(i*(i-1))/2 + j-1] = x;
+    if(i<=j) {
+        A[dimension*(i-1)-((i-2)*(i-1)/2)+(j-i)] = x;
     }
 }
 
-void LowerTriangular::randomizeMatrixElements()
+void UpperTriangular::randomizeMatrixElements()
 {
     std::random_device rd; // obtain a random number from hardware
     std::mt19937 gen(rd()); // seed the generator
@@ -64,7 +65,7 @@ void LowerTriangular::randomizeMatrixElements()
     int i, j;
     for(int i=1;i<=dimension;i++){
         for(int j=1;j<=dimension;j++){
-            if(i>=j) {
+            if(i<=j) {
                 set(i,j,distr(gen));
             }
         }
@@ -76,7 +77,7 @@ int main(){
     int dimensionInput, row, column, elem;
     cout<<"Please enter dimension of the matrix - "<<endl;
     cin>>dimensionInput;
-    LowerTriangular usersMatrix(dimensionInput);
+    UpperTriangular usersMatrix(dimensionInput);
     cout<<"Matrix created"<<endl;
 
     do
@@ -121,18 +122,6 @@ int main(){
             break;
         }
     } while (choice >0 && choice <5);
-    
-    // d.set(1,1,1);
-    // d.set(2,1,2);
-    // d.set(2,2,4);
-    // d.set(3,1,6);
-    // d.set(3,2,8);
-    // d.set(3,3,3);
-    // d.set(4,1,5);
-    // d.set(4,2,7);
-    // d.set(4,3,9);
-    // d.set(4,4,4);
-    // d.display();
 
     return 0;
 }
