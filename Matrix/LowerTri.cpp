@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <random>
 
 using namespace std;
 
@@ -24,6 +25,7 @@ class LowerTriangular{
         void display();
         void get(int i, int j);
         void set(int i, int j, int x);
+        void randomizeMatrixElements(); //inserts random elements in matrix
 };
 
 void LowerTriangular::display()
@@ -54,6 +56,21 @@ void LowerTriangular::set(int i, int j, int x)
     }
 }
 
+void LowerTriangular::randomizeMatrixElements()
+{
+    std::random_device rd; // obtain a random number from hardware
+    std::mt19937 gen(rd()); // seed the generator
+    std::uniform_int_distribution<> distr(0, 10); // define the range
+    int i, j;
+    for(int i=1;i<=dimension;i++){
+        for(int j=1;j<=dimension;j++){
+            if(i>=j) {
+                set(i,j,distr(gen));
+            }
+        }
+    }
+}
+
 int main(){
     int choice=0;
     int dimensionInput, row, column, elem;
@@ -69,7 +86,8 @@ int main(){
         cout<<"1. Set"<<endl;
         cout<<"2. Get"<<endl;
         cout<<"3. Display"<<endl;
-        cout<<"4. Exit"<<endl;
+        cout<<"4. Randomize Elements"<<endl;
+        cout<<"5. Exit"<<endl;
         cin>>choice;
         cout<<endl;
 
@@ -95,11 +113,15 @@ int main(){
             usersMatrix.display();
             cout<<endl;
             break;
+        case 4: //randomize
+            usersMatrix.randomizeMatrixElements();
+            cout<<endl;
+            break;
         default:
 
             break;
         }
-    } while (choice >=1 && choice <=3);
+    } while (choice >0 && choice <5);
     
     // d.set(1,1,1);
     // d.set(2,1,2);
