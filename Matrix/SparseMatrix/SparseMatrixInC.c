@@ -80,12 +80,12 @@ struct Sparse* add(struct Sparse s1, struct Sparse s2){
     for(;i<s1.num;i++){
         sum->ele[k].i = s1.ele[i].i;
         sum->ele[k].j = s1.ele[i].j;
-        sum->ele[k++].x = s1.ele[i++].x;
+        sum->ele[k++].x = s1.ele[i].x;
     }
     for(;j<s2.num;j++){
         sum->ele[k].i = s2.ele[j].i;
         sum->ele[k].j = s2.ele[j].j;
-        sum->ele[k++].x = s2.ele[j++].x;
+        sum->ele[k++].x = s2.ele[j].x;
     }
 
     sum->m = s1.m;
