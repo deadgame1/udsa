@@ -95,6 +95,11 @@ int main()
     if(sum->m == 0){
         printf("Matrix cannot be added");
     }else{
+        printf("First Matrix \n");
+        display(usersSparse);
+        printf("Second Matrix \n");
+        display(usersSparse2);
+        printf("Sum \n");
         display(*sum);
     }
     return 0;
