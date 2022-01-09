@@ -41,13 +41,64 @@ void display(struct Sparse s){
         printf("\n");
     }
 }
+struct Sparse* add(struct Sparse s1, struct Sparse s2){
+    struct Sparse *sum;
+    sum=(struct Sparse *)malloc(sizeof(struct Sparse));
+    sum->ele = (struct Element *)malloc((s1.num+s2.num)*(sizeof(struct Sparse)));
+    if(s1.m != s2.m || s1.n != s2.n){
+        return sum;
+    }
+    int i,j,k;
+    i=j=k=0;
+    
+    while(i<s1.num || j<s2.num){
+        if(s1.ele[i].i < s2.ele[j].i){
+            sum->ele[k].i = s1.ele[i].i;
+            sum->ele[k].j = s1.ele[i].j;
+            sum->ele[k++].x = s1.ele[i++].x;
+        }else if(s2.ele[j].i < s1.ele[i].i){
+            sum->ele[k].i = s2.ele[j].i;
+            sum->ele[k].j = s2.ele[j].j;
+            sum->ele[k++].x = s2.ele[j++].x;
+        }else{
+            if(s1.ele[i].j < s2.ele[j].j){
+                sum->ele[k].i = s1.ele[i].i;
+                sum->ele[k].j = s1.ele[i].j;
+                sum->ele[k++].x = s1.ele[i++].x;
+            }else if(s2.ele[j].j < s1.ele[i].j){
+                sum->ele[k].i = s2.ele[j].i;
+                sum->ele[k].j = s2.ele[j].j;
+                sum->ele[k++].x = s2.ele[j++].x;
+            }else{
+                //add
+                sum->ele[k].i = s1.ele[i].i;
+                sum->ele[k].j = s1.ele[i].j;
+                sum->ele[k++].x = s1.ele[i++].x + s2.ele[j++].x;
+            }
+        }
+    }
+
+    sum->m = s1.m;
+    sum->n = s1.n;
+    sum->num = k;
+    return sum;
+}
 int main()
 {
     struct Sparse usersSparse;
     create(&usersSparse);
+    struct Sparse usersSparse2;
+    create(&usersSparse2);
+
     printf("\n");
     printf("\n");
-    printf("\n");
-    display(usersSparse);
+
+    struct Sparse *sum;
+    sum = add(usersSparse,usersSparse2);
+    if(sum->m == 0){
+        printf("Matrix cannot be added");
+    }else{
+        display(*sum);
+    }
     return 0;
 }
