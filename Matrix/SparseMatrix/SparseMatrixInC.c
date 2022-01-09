@@ -53,39 +53,26 @@ struct Sparse* add(struct Sparse s1, struct Sparse s2){
     
     while(i<s1.num && j<s2.num){
         if(s1.ele[i].i < s2.ele[j].i){
-            sum->ele[k].i = s1.ele[i].i;
-            sum->ele[k].j = s1.ele[i].j;
-            sum->ele[k++].x = s1.ele[i++].x;
+            sum->ele[k++] = s1.ele[i++];
         }else if(s2.ele[j].i < s1.ele[i].i){
-            sum->ele[k].i = s2.ele[j].i;
-            sum->ele[k].j = s2.ele[j].j;
-            sum->ele[k++].x = s2.ele[j++].x;
+            sum->ele[k++] = s2.ele[j++];
         }else{
             if(s1.ele[i].j < s2.ele[j].j){
-                sum->ele[k].i = s1.ele[i].i;
-                sum->ele[k].j = s1.ele[i].j;
-                sum->ele[k++].x = s1.ele[i++].x;
+                sum->ele[k++] = s1.ele[i++];
             }else if(s2.ele[j].j < s1.ele[i].j){
-                sum->ele[k].i = s2.ele[j].i;
-                sum->ele[k].j = s2.ele[j].j;
-                sum->ele[k++].x = s2.ele[j++].x;
+                sum->ele[k++] = s2.ele[j++];
             }else{
                 //add
-                sum->ele[k].i = s1.ele[i].i;
-                sum->ele[k].j = s1.ele[i].j;
+                sum->ele[k] = s1.ele[i];
                 sum->ele[k++].x = s1.ele[i++].x + s2.ele[j++].x;
             }
         }
     }
     for(;i<s1.num;i++){
-        sum->ele[k].i = s1.ele[i].i;
-        sum->ele[k].j = s1.ele[i].j;
-        sum->ele[k++].x = s1.ele[i].x;
+        sum->ele[k] = s1.ele[i];
     }
     for(;j<s2.num;j++){
-        sum->ele[k].i = s2.ele[j].i;
-        sum->ele[k].j = s2.ele[j].j;
-        sum->ele[k++].x = s2.ele[j].x;
+        sum->ele[k++] = s2.ele[j];
     }
 
     sum->m = s1.m;
