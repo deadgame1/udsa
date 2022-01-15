@@ -37,6 +37,9 @@ class Polynomial{
         Polynomial(int n){
             this->n = n;
         }
+        ~Polynomial(){
+            delete [] t;
+        }
         void initializeTerms(){
             int coef, exp;
             t = new Term[n];
