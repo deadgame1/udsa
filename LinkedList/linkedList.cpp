@@ -137,6 +137,17 @@ Node * linearSearch(Node *p, int key)
     return NULL;
 }
 
+Node * RlinearSearch(Node *p, int key)
+{
+    if(p == NULL) return NULL;
+    
+    if(p->data == key) return p;
+
+    RlinearSearch(p->next,key);
+
+    return NULL;
+}
+
 int main()
 {
     int A[] = {3,5,7,9,11,13};
@@ -144,6 +155,7 @@ int main()
 
     //cout<<first->next<<endl;
     cout<<linearSearch(first,3)<<endl;
+    cout<<RlinearSearch(first,3)<<endl;
     //cout<<first->next<<endl;
 
     return 0;
