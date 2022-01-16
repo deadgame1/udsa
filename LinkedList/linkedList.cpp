@@ -100,6 +100,16 @@ int maxElement(struct Node *p)
     return max;
 }
 
+int minElement(struct Node *p)
+{
+    int min = INT16_MAX;
+    while(p)
+    {
+        if(p->data < min) min = p->data;
+        p = p->next;
+    }
+    return min;
+}
 
 int main()
 {
@@ -107,7 +117,7 @@ int main()
     create(A,6);
 
     //cout<<first->next<<endl;
-    cout<<maxElement(first)<<endl;
+    cout<<minElement(first)<<endl;
     //cout<<first->next<<endl;
 
     return 0;
