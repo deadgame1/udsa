@@ -82,11 +82,18 @@ int sumOfAllElements(struct Node *p)
     return sum;
 }
 
+int RsumOfAllElements(struct Node *p)
+{
+    int sum = 0;
+    if(!p) return 0;
+    return RsumOfAllElements(p->next) + p->data;
+}
+
 int main()
 {
     int A[] = {3,5,7,9,11,13};
     create(A,6);
-    cout<<sumOfAllElements(first)<<endl;
+    cout<<RsumOfAllElements(first)<<endl;
 
     return 0;
 }
