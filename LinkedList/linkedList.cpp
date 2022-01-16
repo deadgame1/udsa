@@ -187,14 +187,44 @@ Node * RlinearSearch(Node *p, int key)
     return NULL;
 }
 
+/**
+ * @brief improved linear search by "Move to Head" strategy
+ * 
+ * @param p 
+ * @param key 
+ * @return struct Node* 
+ */
+struct Node * ImprovedLinearSearch(struct Node *p, int key)
+{
+    struct Node *q = NULL;
+    while(p)
+    {
+        if(p->data == key)
+        {
+            q->next = p->next;
+            p->next = first;
+            first = p;
+            return p;
+        }
+        q = p;
+        p = p->next;
+    }
+
+    return NULL;
+}
+
 int main()
 {
     int A[] = {3,5,7,9,11,13};
     create(A,6);
-
+    struct Node *result;
     //cout<<first->next<<endl;
-    cout<<RmaxElement2(first)<<endl;
-    //cout<<RlinearSearch(first,3)<<endl;
+    result = ImprovedLinearSearch(first,4);
+    if(result)
+        cout<<"Key is found - "<<result->data<<endl;
+    else    
+        cout<<"Key not found \n";
+
     //cout<<first->next<<endl;
 
     return 0;
