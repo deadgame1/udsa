@@ -33,11 +33,20 @@ void display(struct Node *p)
         p = p->next;
     }
 }
+/**
+ * @brief Recursive display fn for LinkedList, Tail Recursion
+ * 
+ */
+void Rdisplay(struct Node *p){
+    if(!p) return;
+    cout<<p->data<<endl;
+    Rdisplay(p->next);
+}
 int main()
 {
     int A[] = {3,5,7,9,11,13};
     create(A,6);
-    display(first);
+    Rdisplay(first);
 
     return 0;
 }
