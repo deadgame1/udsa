@@ -42,11 +42,20 @@ void Rdisplay(struct Node *p){
     cout<<p->data<<endl;
     Rdisplay(p->next);
 }
+/**
+ * @brief printing in reverse
+ * 
+ */
+void ReverseDisplay(struct Node *p){
+    if(!p) return;
+    ReverseDisplay(p->next);
+    cout<<p->data<<endl;
+}
 int main()
 {
     int A[] = {3,5,7,9,11,13};
     create(A,6);
-    Rdisplay(first);
+    ReverseDisplay(first);
 
     return 0;
 }
