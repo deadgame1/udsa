@@ -104,6 +104,48 @@ int maxElement(struct Node *p)
 }
 
 /**
+ * @brief Any Iterative function can be easily converted to Tail recursion.
+ * this is what I have done below with the original iterative function "maxElement"
+ * 
+ * @param p 
+ * @return int 
+ */
+int RmaxElement(Node *p)
+{
+    static int max = INT16_MIN;
+    if(!p) return max;
+    if(p->data > max) max = p->data;
+    if(p->next){
+        RmaxElement(p->next);
+    }
+    return max;
+}
+
+/**
+ * @brief this is kind of head recursion.
+ * if you draw or imagine the tracing tree, the comparisons are done from last to first in order to find max
+ * in RmaxElement the comparisons were done top to bottom.
+ * 
+ * @param p 
+ * @return int 
+ */
+int RmaxElement2(Node* p)
+{
+    int x = 0;
+    if(!p)
+    {
+        return INT16_MIN;
+    }else{
+        x = RmaxElement2(p->next);
+        if(x > p->data){
+            return x;
+        }else{
+            return p->data;
+        }
+    }
+}
+
+/**
  * @brief please note even though a pointer is the formal paramater, and the actual parameter is first
  * this is not call by address, this is call by value. first pointer's copy is made to "p"
  * to confirm this you can check the addresses of first and of p's address at the beginning of the function and at the end.
@@ -126,9 +168,6 @@ int minElement(struct Node *p)
 
 Node * linearSearch(Node *p, int key)
 {
-    if(p == NULL){
-        return NULL;
-    }
     while(p)
     {
         if(p->data == key) return p;
@@ -154,8 +193,8 @@ int main()
     create(A,6);
 
     //cout<<first->next<<endl;
-    cout<<linearSearch(first,3)<<endl;
-    cout<<RlinearSearch(first,3)<<endl;
+    cout<<RmaxElement2(first)<<endl;
+    //cout<<RlinearSearch(first,3)<<endl;
     //cout<<first->next<<endl;
 
     return 0;
