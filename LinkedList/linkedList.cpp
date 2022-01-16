@@ -33,6 +33,7 @@ void display(struct Node *p)
         p = p->next;
     }
 }
+
 /**
  * @brief Recursive display fn for LinkedList, Tail Recursion
  * 
@@ -42,6 +43,7 @@ void Rdisplay(struct Node *p){
     cout<<p->data<<endl;
     Rdisplay(p->next);
 }
+
 /**
  * @brief printing in reverse
  * 
@@ -61,17 +63,30 @@ int count(struct Node *p){
     }
     return count;
 }
+
 int Rcount(struct Node *p)
 {
     int count = 0;
     if(!p) return 0;
     return Rcount(p->next)+1;
 }
+
+int sumOfAllElements(struct Node *p)
+{
+    int sum = 0;
+    while(p)
+    {
+        sum = sum + p->data;
+        p = p->next;
+    }
+    return sum;
+}
+
 int main()
 {
     int A[] = {3,5,7,9,11,13};
     create(A,6);
-    cout<<Rcount(first)<<endl;
+    cout<<sumOfAllElements(first)<<endl;
 
     return 0;
 }
