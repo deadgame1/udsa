@@ -89,11 +89,26 @@ int RsumOfAllElements(struct Node *p)
     return RsumOfAllElements(p->next) + p->data;
 }
 
+int maxElement(struct Node *p)
+{
+    int max = INT16_MIN;
+    while(p)
+    {
+        if(p->data > max) max = p->data;
+        p = p->next;
+    }
+    return max;
+}
+
+
 int main()
 {
     int A[] = {3,5,7,9,11,13};
     create(A,6);
-    cout<<RsumOfAllElements(first)<<endl;
+
+    //cout<<first->next<<endl;
+    cout<<maxElement(first)<<endl;
+    //cout<<first->next<<endl;
 
     return 0;
 }
