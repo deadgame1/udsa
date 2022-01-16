@@ -51,11 +51,22 @@ void ReverseDisplay(struct Node *p){
     ReverseDisplay(p->next);
     cout<<p->data<<endl;
 }
+
+int count(struct Node *p){
+    int count = 0;
+    while(p)
+    {
+        count++;
+        p = p->next;
+    }
+    return count;
+}
+
 int main()
 {
     int A[] = {3,5,7,9,11,13};
     create(A,6);
-    ReverseDisplay(first);
+    cout<<count(first)<<endl;
 
     return 0;
 }
