@@ -61,12 +61,17 @@ int count(struct Node *p){
     }
     return count;
 }
-
+int Rcount(struct Node *p)
+{
+    int count = 0;
+    if(!p) return 0;
+    return Rcount(p->next)+1;
+}
 int main()
 {
     int A[] = {3,5,7,9,11,13};
     create(A,6);
-    cout<<count(first)<<endl;
+    cout<<Rcount(first)<<endl;
 
     return 0;
 }
