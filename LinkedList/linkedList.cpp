@@ -7,12 +7,13 @@ struct Node{
     struct Node *next;
 };
 
-struct Node *first=NULL; //global pointer
+//global pointers
+struct Node *first=NULL; 
+struct Node *last=NULL; 
 
 void create(int A[],int n)
 {
     int i;
-    struct Node *last;
     struct Node *newNode;
     first = new Node;
     first->data = A[0];
@@ -214,16 +215,23 @@ struct Node * ImprovedLinearSearch(struct Node *p, int key)
     return NULL;
 }
 
-
-void insert(int position,int value)
+/**
+ * @brief Insert a value at a given position in the linked list
+ * 
+ * @param position 
+ * @param value 
+ */
+struct Node * insert(int position,int value)
 {
     struct Node * t;
-    if(position < 0 || position > count(first)){
+    int listLength = count(first);
+    if(position < 0 || position > listLength){
         cout<<"invalid index provided for insertion"<<endl;
-        return;
+        return NULL;
     }
     t=new Node;
     t->data = value;
+    
     if(position == 0)
     {
         t->next = first;
@@ -231,22 +239,43 @@ void insert(int position,int value)
     }else if(position > 0)
     {
         struct Node *p = first;
-        for(int i=0;i<position-1 && p;i++)
+        int i;
+        for(i=0;i<position-1 && p;i++)
         {
             p = p->next;
         }
+        cout<<i<<endl;
         if(p)
         {
             t->next = p->next;
             p->next = t; 
+            if(position == listLength){
+                last = t;
+            }
         }
+    }
+    return t;
+}
+
+void insertLast(int value)
+{
+    struct Node* t = new Node;
+    t->data = value;
+    t->next = NULL;
+    if(!first)
+    {
+        first = last = t;
+    }else{
+        last->next = t;
+        last = t;
     }
 }
 
 int main()
 {
-    int A[] = {3,5,7,9,11,13};
-    create(A,6);
+    //int A[] = {3,5,7,9,11,13};
+    int A[] = {1};
+    create(A,0);
     //struct Node *result;
     // result = ImprovedLinearSearch(first,13);
     // if(result)
@@ -254,13 +283,18 @@ int main()
     // else    
     //     cout<<"Key not found \n";
 
-
+    struct Node * tempVar;
     display(first);
 
-    insert(0,1);
-    insert(7,15);
-    insert(4,200);
-
+    insertLast(15);
+    //tempLast = last;
+    insertLast(17);
+    //tempLast = last;
+    insertLast(19);
+    //tempLast = last;
+    tempVar = insert(4,2);
+    
     display(first);
+
     return 0;
 }
