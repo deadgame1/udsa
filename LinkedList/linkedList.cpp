@@ -217,16 +217,17 @@ struct Node * ImprovedLinearSearch(struct Node *p, int key)
 
 void insert(int position,int value)
 {
+    struct Node * t;
     if(position < 0 || position > count(first)){
         cout<<"invalid index provided for insertion"<<endl;
         return;
     }
+    t=new Node;
+    t->data = value;
     if(position == 0)
     {
-        struct Node *newFirst = new Node;
-        newFirst->data = value;
-        newFirst->next = first;
-        first = newFirst; 
+        t->next = first;
+        first = t; 
     }else if(position > 0)
     {
         struct Node *p = first;
@@ -236,10 +237,8 @@ void insert(int position,int value)
         }
         if(p)
         {
-            struct Node *temp = new Node;
-            temp->data = value;
-            temp->next = p->next;
-            p->next = temp; 
+            t->next = p->next;
+            p->next = t; 
         }
     }
 }
