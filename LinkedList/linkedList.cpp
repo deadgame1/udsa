@@ -310,6 +310,7 @@ void insertInASortedList(int value)
 
 /**
  * @brief deletes the element at the given position and returns the element deleted.
+ * handles edge cases when list is empty or index is out of bounds
  * 
  * @param position 
  * @return int 
@@ -351,6 +352,23 @@ int deletePosition(int position)
     return x;
 }
 
+bool checkListSorted()
+{
+    int x = -32768;
+    struct Node *p = first;
+
+    while(p){
+        if(x > p->data)
+        {
+            return false;
+        }
+        x = p->data;
+        p = p->next;
+    }
+    
+    return true;
+}
+
 int main()
 {
     //int A[] = {3,5,7,9,11,13};
@@ -376,7 +394,9 @@ int main()
     insertInASortedList(8);
     insertInASortedList(5);
     deletePosition(9);
-
+    cout<<checkListSorted()<<endl;
+    insert(0,200);
+    cout<<checkListSorted()<<endl;
     display(first);
 
     return 0;
