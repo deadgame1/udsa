@@ -308,7 +308,46 @@ void insertInASortedList(int value)
     }
 }
 
+/**
+ * @brief deletes the element at the given position and returns the element deleted.
+ * 
+ * @param position 
+ * @return int 
+ */
+int deletePosition(int position)
+{
+    int x,i;
+    struct Node *p, *t;
+    int length = count(first);
+    p = first;
+    t = NULL; //tailing pointer
 
+    if(!first){
+        cout<<"list is empty";
+        return 0;
+    }
+
+    if(position == 1)
+    {
+        first = first->next;
+        x = p->data;
+        delete p;
+    }else if(position > 1 && position <= length){
+        for(i=0;i<position-1;i++)
+        {
+            t = p;
+            p = p->next;
+        }
+        t->next = p->next;
+        x = p->data;
+        delete p;
+    }else{
+        cout<<"Invalid position"<<endl;
+        return 0;
+    }
+
+    return x;
+}
 
 int main()
 {
@@ -325,17 +364,17 @@ int main()
     struct Node * tempVar;
     //display(first);
 
-    // insertLast(3);
-    // insertLast(5);
-    // insertLast(7);
-    // insertLast(9);
-    // insertLast(11);
-    // insertInASortedList(10);
-    // insertInASortedList(200);
+    insertLast(3);
+    insertLast(5);
+    insertLast(7);
+    insertLast(9);
+    insertLast(11);
+    insertInASortedList(10);
+    insertInASortedList(200);
     insertInASortedList(8);
     insertInASortedList(5);
-    //tempVar = insert(3,2);
-    
+    deletePosition(9);
+
     display(first);
 
     return 0;
