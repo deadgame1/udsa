@@ -32,9 +32,10 @@ void display(struct Node *p)
 {
     while(p)
     {
-        cout<<p->data<<endl;
+        cout<<p->data<<" ";
         p = p->next;
     }
+    cout<<endl;
 }
 
 /**
@@ -213,19 +214,54 @@ struct Node * ImprovedLinearSearch(struct Node *p, int key)
     return NULL;
 }
 
+
+void insert(int position,int value)
+{
+    if(position < 0 || position > count(first)){
+        cout<<"invalid index provided for insertion"<<endl;
+        return;
+    }
+    if(position == 0)
+    {
+        struct Node *newFirst = new Node;
+        newFirst->data = value;
+        newFirst->next = first;
+        first = newFirst; 
+    }else if(position > 0)
+    {
+        struct Node *p = first;
+        for(int i=0;i<position-1 && p;i++)
+        {
+            p = p->next;
+        }
+        if(p)
+        {
+            struct Node *temp = new Node;
+            temp->data = value;
+            temp->next = p->next;
+            p->next = temp; 
+        }
+    }
+}
+
 int main()
 {
     int A[] = {3,5,7,9,11,13};
     create(A,6);
-    struct Node *result;
-    //cout<<first->next<<endl;
-    result = ImprovedLinearSearch(first,4);
-    if(result)
-        cout<<"Key is found - "<<result->data<<endl;
-    else    
-        cout<<"Key not found \n";
+    //struct Node *result;
+    // result = ImprovedLinearSearch(first,13);
+    // if(result)
+    //     cout<<"Key is found - "<<result->data<<endl;
+    // else    
+    //     cout<<"Key not found \n";
 
-    //cout<<first->next<<endl;
 
+    display(first);
+
+    insert(0,1);
+    insert(7,15);
+    insert(4,200);
+
+    display(first);
     return 0;
 }
