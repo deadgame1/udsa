@@ -317,6 +317,7 @@ void insertInASortedList(int value)
 int deletePosition(int position)
 {
     int x,i;
+    x=-1;
     struct Node *p, *t;
     int length = count(first);
     p = first;
@@ -324,7 +325,11 @@ int deletePosition(int position)
 
     if(!first){
         cout<<"list is empty";
-        return 0;
+        return x;
+    }
+
+    if(position < 1 || position > length){
+        return x;
     }
 
     if(position == 1)
@@ -332,7 +337,7 @@ int deletePosition(int position)
         first = first->next;
         x = p->data;
         delete p;
-    }else if(position > 1 && position <= length){
+    }else{
         for(i=0;i<position-1;i++)
         {
             t = p;
@@ -341,9 +346,6 @@ int deletePosition(int position)
         t->next = p->next;
         x = p->data;
         delete p;
-    }else{
-        cout<<"Invalid position"<<endl;
-        return 0;
     }
 
     return x;
