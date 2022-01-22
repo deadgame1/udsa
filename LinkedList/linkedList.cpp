@@ -285,7 +285,7 @@ void insertInASortedList(int value)
         first = last = t;
     }else if(t->data < p->data)
     {
-        t->next = p->next;
+        t->next = p;
         first = t;
     }else{
         while(p->next)
@@ -318,16 +318,17 @@ int main()
     //     cout<<"Key not found \n";
 
     struct Node * tempVar;
-    display(first);
+    //display(first);
 
-    insertLast(3);
-    insertLast(5);
-    insertLast(7);
-    insertLast(9);
-    insertLast(11);
-    insertInASortedList(10);
-    insertInASortedList(200);
+    // insertLast(3);
+    // insertLast(5);
+    // insertLast(7);
+    // insertLast(9);
+    // insertLast(11);
+    // insertInASortedList(10);
+    // insertInASortedList(200);
     insertInASortedList(8);
+    insertInASortedList(5);
     //tempVar = insert(3,2);
     
     display(first);
