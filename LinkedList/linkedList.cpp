@@ -280,7 +280,10 @@ void insertInASortedList(int value)
     struct Node *t = new Node;
     bool insertionDone = false;
     t->data = value;
-    if(t->data < p->data)
+    if(first == NULL)
+    {
+        first = last = t;
+    }else if(t->data < p->data)
     {
         t->next = p->next;
         first = t;
