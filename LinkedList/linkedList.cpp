@@ -221,13 +221,13 @@ struct Node * ImprovedLinearSearch(struct Node *p, int key)
  * @param position 
  * @param value 
  */
-struct Node * insert(int position,int value)
+void insert(int position,int value)
 {
     struct Node * t;
     int listLength = count(first);
     if(position < 0 || position > listLength){
         cout<<"invalid index provided for insertion"<<endl;
-        return NULL;
+        return;
     }
     t=new Node;
     t->data = value;
@@ -244,7 +244,6 @@ struct Node * insert(int position,int value)
         {
             p = p->next;
         }
-        cout<<i<<endl;
         if(p)
         {
             t->next = p->next;
@@ -254,7 +253,6 @@ struct Node * insert(int position,int value)
             }
         }
     }
-    return t;
 }
 
 void insertLast(int value)
@@ -271,11 +269,44 @@ void insertLast(int value)
     }
 }
 
+/**
+ * @brief assuming list is sorted in ascending manner,
+ * 
+ * @param value 
+ */
+void insertInASortedList(int value)
+{   
+    struct Node *p = first;
+    struct Node *t = new Node;
+    bool insertionDone = false;
+    t->data = value;
+    if(t->data < p->data)
+    {
+        t->next = p->next;
+        first = t;
+    }else{
+        while(p->next)
+        {
+            if(value < p->next->data){
+                t->next = p->next;
+                p->next = t;
+                insertionDone = true;
+                break;
+            }
+            p = p->next;
+        }
+        if(!insertionDone)
+        {
+            insertLast(value);
+            delete t,p;
+        }
+    }
+}
 int main()
 {
     //int A[] = {3,5,7,9,11,13};
-    int A[] = {1};
-    create(A,0);
+    //int A[] = {1};
+    //create(A,0);
     //struct Node *result;
     // result = ImprovedLinearSearch(first,13);
     // if(result)
@@ -286,13 +317,15 @@ int main()
     struct Node * tempVar;
     display(first);
 
-    insertLast(15);
-    //tempLast = last;
-    insertLast(17);
-    //tempLast = last;
-    insertLast(19);
-    //tempLast = last;
-    tempVar = insert(4,2);
+    insertLast(3);
+    insertLast(5);
+    insertLast(7);
+    insertLast(9);
+    insertLast(11);
+    insertInASortedList(10);
+    insertInASortedList(200);
+    insertInASortedList(8);
+    //tempVar = insert(3,2);
     
     display(first);
 
