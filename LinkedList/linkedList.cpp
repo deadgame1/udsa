@@ -271,6 +271,8 @@ void insertLast(int value)
 
 /**
  * @brief assuming list is sorted in ascending manner,
+ * handles the edge case if list is empty
+ * also handles if the given value is less than first node.
  * 
  * @param value 
  */
@@ -300,11 +302,14 @@ void insertInASortedList(int value)
         }
         if(!insertionDone)
         {
-            insertLast(value);
+            insertLast(value); //handles reassignment of last pointer properly instead of manuall doing it again here.
             delete t,p;
         }
     }
 }
+
+
+
 int main()
 {
     //int A[] = {3,5,7,9,11,13};
