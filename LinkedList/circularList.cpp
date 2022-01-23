@@ -50,6 +50,7 @@ int main()
     struct Node *list = new Node;
     int A[5] = {3,5,7,9,10};
     struct Node *head = createCircularList(A,5,list);
-
+    displayCircularList(head);
+    
     return 0;
 }
