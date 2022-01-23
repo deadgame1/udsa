@@ -442,7 +442,16 @@ void reverseUsingSlidingPointers()
     first = q;
 }
 
-
+void reverseUsingRecursion(struct Node *t, struct Node *p)
+{
+    if(p)
+    {
+        reverseUsingRecursion(p, p->next);
+        p->next = t;
+    }else{
+        first = t;
+    }
+}
 int main()
 {
     //int A[] = {3,5,7,9,11,13};
@@ -469,7 +478,7 @@ int main()
     insertLast(17);
     display(first);
 
-    reverseUsingSlidingPointers();
+    reverseUsingRecursion(NULL,first);
 
     display(first);
 
