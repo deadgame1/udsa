@@ -397,6 +397,29 @@ void removeDuplicatesInSorted()
     }
 }
 
+void reverseListUsingAux()
+{
+    int listLength = count(first);
+    if(first == NULL || listLength == 1){
+        return;
+    }
+    int i=0;
+    int *A = new int[listLength];
+    struct Node * p = first;
+    while(p)
+    {
+        A[i++] = p->data;
+        p = p->next;
+    }
+    i--;
+    p = first;
+    while(i >=0)
+    {
+        p->data = A[i--];
+        p = p->next;
+    }
+}
+
 int main()
 {
     //int A[] = {3,5,7,9,11,13};
@@ -411,18 +434,18 @@ int main()
     //struct Node * tempVar;
     //display(first);
 
+    insertLast(1);
+    insertLast(2);
+    insertLast(3);
+    insertLast(4);
     insertLast(5);
-    insertLast(5);
-    insertLast(8);
-    insertLast(8);
-    insertLast(8);
-    insertInASortedList(10);
-    insertInASortedList(200);
-    insertInASortedList(200);
-    insertInASortedList(200);
+    insertInASortedList(6);
+    insertInASortedList(7);
+    insertInASortedList(8);
+    insertInASortedList(9);
     display(first);
 
-    removeDuplicatesInSorted();
+    reverseListUsingAux();
 
     display(first);
 
