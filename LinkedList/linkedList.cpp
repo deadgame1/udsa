@@ -352,9 +352,15 @@ int deletePosition(int position)
     return x;
 }
 
+/**
+ * @brief checks if list is in the ascending order or not.
+ * 
+ * @return true 
+ * @return false 
+ */
 bool checkListSorted()
 {
-    int x = -32768;
+    int x = -65536;
     struct Node *p = first;
 
     while(p){
@@ -369,6 +375,28 @@ bool checkListSorted()
     return true;
 }
 
+void removeDuplicatesInSorted()
+{
+    if(false == checkListSorted() || first == NULL || 1 == count(first))
+    {
+        return;
+    }
+
+    struct Node *p = first;
+    struct Node *q = p->next;
+
+    while(q){
+        if(p->data == q->data){
+            p->next = q->next;
+            delete q;
+            q = p->next;
+        }else{
+            p = q;
+            q = q->next;
+        }
+    }
+}
+
 int main()
 {
     //int A[] = {3,5,7,9,11,13};
@@ -380,23 +408,22 @@ int main()
     //     cout<<"Key is found - "<<result->data<<endl;
     // else    
     //     cout<<"Key not found \n";
-
-    struct Node * tempVar;
+    //struct Node * tempVar;
     //display(first);
 
-    insertLast(3);
     insertLast(5);
-    insertLast(7);
-    insertLast(9);
-    insertLast(11);
+    insertLast(5);
+    insertLast(8);
+    insertLast(8);
+    insertLast(8);
     insertInASortedList(10);
     insertInASortedList(200);
-    insertInASortedList(8);
-    insertInASortedList(5);
-    deletePosition(9);
-    cout<<checkListSorted()<<endl;
-    insert(0,200);
-    cout<<checkListSorted()<<endl;
+    insertInASortedList(200);
+    insertInASortedList(200);
+    display(first);
+
+    removeDuplicatesInSorted();
+
     display(first);
 
     return 0;
