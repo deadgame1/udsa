@@ -59,6 +59,12 @@ void ReverseDisplay(struct Node *p){
     cout<<p->data<<endl;
 }
 
+/**
+ * @brief this function will not work with LOOP linked list so be careful 
+ * 
+ * @param p 
+ * @return int 
+ */
 int count(struct Node *p){
     int count = 0;
     while(p)
@@ -555,6 +561,35 @@ struct Node * merge2Lists(struct Node *one, struct Node *two)
     return three;
 }
 
+struct Node * getNodeWithValue(struct Node *p, int value){
+    struct Node * result = NULL;
+    while(p)
+    {
+        if(p->data == value){
+            return result = p;
+        }
+        p = p->next;
+    }
+    return result;
+}
+
+int isLOOP(struct Node *f)
+{
+    struct Node *p,*q;
+    p = q = f;
+
+    do
+    {
+        p = p->next;
+        q = q->next;
+        q = q ? q->next : NULL;
+    } while (p && q && (p != q));
+    
+    if(p == q)
+        return 1;
+    else    
+        return 0;
+}
 int main()
 {
     //int A[] = {3,5,7,9,11,13};
@@ -575,16 +610,22 @@ int main()
     insertLastInAList(&one,6);
     insertLastInAList(&one,8);
     display(one);
-    struct Node *two = NULL;
-    insertLastInAList(&two,1);
-    insertLastInAList(&two,3);
-    insertLastInAList(&two,5);
-    insertLastInAList(&two,7);
-    insertLastInAList(&two,9);   
-    display(two);
+    //struct Node * lastNode = getNodeWithValue(one,8);
+    //struct Node *t = one->next;
+    //struct Node *lastNode = one->next->next->next;
+    //lastNode->next = t;
+    cout<<isLOOP(one)<<endl;
 
-    struct Node * third = merge2Lists(one,two);
-    display(third);
+    // struct Node *two = NULL;
+    // insertLastInAList(&two,10);
+    // insertLastInAList(&two,30);
+    // insertLastInAList(&two,50);
+    // insertLastInAList(&two,70);
+    // insertLastInAList(&two,90);
+    //display(two);
+
+    //struct Node * third = merge2Lists(one,two);
+    //display(third);
 
     // reverseUsingRecursion(NULL,first); //dont forget to last = first, before calling this fn
 
