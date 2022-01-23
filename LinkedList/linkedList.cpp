@@ -505,6 +505,43 @@ void insertLastInAList(struct Node** p, int value)
     }
 }
 
+struct Node * merge2Lists(struct Node *one, struct Node *two)
+{
+    struct Node *three = NULL, *lastOfThree = NULL;
+
+    if(one->data < two->data)
+    {
+        three = lastOfThree = one;
+        one = one->next;
+        three->next = NULL;
+    }else{
+        three = lastOfThree = two;
+        two = two->next;
+        three->next = NULL;
+    }
+
+    while(one && two)
+    {
+        if(one->data < two->data){
+            lastOfThree->next = one;
+            lastOfThree = one;
+            one = one->next;
+        }else{
+            lastOfThree->next = two;
+            lastOfThree = two;
+            two = two->next;
+        }
+        lastOfThree->next = NULL;
+    }
+
+    if(one) 
+        lastOfThree->next = one;
+    else
+        lastOfThree->next = two;   
+
+    return three;
+}
+
 int main()
 {
     //int A[] = {3,5,7,9,11,13};
@@ -520,22 +557,21 @@ int main()
     //display(first);
 
     struct Node *one = NULL;
-    insertLastInAList(&one,1);
     insertLastInAList(&one,2);
-    insertLastInAList(&one,3);
     insertLastInAList(&one,4);
-    insertLastInAList(&one,5);
+    insertLastInAList(&one,6);
+    insertLastInAList(&one,8);
     display(one);
     struct Node *two = NULL;
-    insertLastInAList(&two,100);
-    insertLastInAList(&two,200);
-    insertLastInAList(&two,300);
-    insertLastInAList(&two,400);
-    insertLastInAList(&two,500);   
+    insertLastInAList(&two,1);
+    insertLastInAList(&two,3);
+    insertLastInAList(&two,5);
+    insertLastInAList(&two,7);
+    insertLastInAList(&two,9);   
     display(two);
 
-    concatenateLists(one,two);
-    display(one);
+    struct Node * third = merge2Lists(one,two);
+    display(third);
 
     // reverseUsingRecursion(NULL,first); //dont forget to last = first, before calling this fn
 
