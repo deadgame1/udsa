@@ -397,6 +397,10 @@ void removeDuplicatesInSorted()
     }
 }
 
+/**
+ * @brief reversing a list using Auxillary array.
+ * 
+ */
 void reverseListUsingAux()
 {
     int listLength = count(first);
@@ -420,6 +424,25 @@ void reverseListUsingAux()
     }
 }
 
+void reverseUsingSlidingPointers()
+{
+    if(first == NULL || count(first) == 1){
+        return;
+    }
+    struct Node *p, *q, *r;
+    p = last = first;
+    q = r = NULL;
+    while(p)
+    {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    first = q;
+}
+
+
 int main()
 {
     //int A[] = {3,5,7,9,11,13};
@@ -436,16 +459,17 @@ int main()
 
     insertLast(1);
     insertLast(2);
-    insertLast(3);
-    insertLast(4);
-    insertLast(5);
+    //insertLast(3);
+    //insertLast(4);
+    //insertLast(5);
     insertInASortedList(6);
     insertInASortedList(7);
     insertInASortedList(8);
-    insertInASortedList(9);
+    insertInASortedList(14);
+    insertLast(17);
     display(first);
 
-    reverseListUsingAux();
+    reverseUsingSlidingPointers();
 
     display(first);
 
