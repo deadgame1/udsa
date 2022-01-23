@@ -442,6 +442,12 @@ void reverseUsingSlidingPointers()
     first = q;
 }
 
+/**
+ * @brief //dont forget to last = first, before calling this fn so that last is pointing to last node.
+ * 
+ * @param t 
+ * @param p 
+ */
 void reverseUsingRecursion(struct Node *t, struct Node *p)
 {
     if(p)
@@ -452,6 +458,53 @@ void reverseUsingRecursion(struct Node *t, struct Node *p)
         first = t;
     }
 }
+
+/**
+ * @brief Just concatenate 2 lists, (different from merging - in which 2 sorte lists are combine to get 1 sorted lists)
+ * this is just concatenate. 
+ * 
+ * @param one 
+ * @param two 
+ * @return struct Node* 
+ */
+struct Node * concatenateLists(struct Node *one, struct Node * two)
+{
+    struct Node * first = one;
+    struct Node * second = two;
+    if(!one && !two){
+        return NULL;
+    }
+    if(!one){
+        return two;
+    }
+    if(!two){
+        return one;
+    }
+    while(first->next){
+        first = first->next;
+    }
+    first->next = two;
+    return one;
+}
+
+void insertLastInAList(struct Node** p, int value)
+{
+    struct Node* t = new Node;
+    struct Node *c = *p;
+    t->data = value;
+    t->next = NULL;
+    if(!(*p))
+    {
+        *p = t;
+    }else{
+        while((c)->next)
+        {
+            c = (c)->next;
+        }
+        (c)->next = t;
+    }
+}
+
 int main()
 {
     //int A[] = {3,5,7,9,11,13};
@@ -466,21 +519,25 @@ int main()
     //struct Node * tempVar;
     //display(first);
 
-    insertLast(1);
-    insertLast(2);
-    //insertLast(3);
-    //insertLast(4);
-    //insertLast(5);
-    insertInASortedList(6);
-    insertInASortedList(7);
-    insertInASortedList(8);
-    insertInASortedList(14);
-    insertLast(17);
-    display(first);
+    struct Node *one = NULL;
+    insertLastInAList(&one,1);
+    insertLastInAList(&one,2);
+    insertLastInAList(&one,3);
+    insertLastInAList(&one,4);
+    insertLastInAList(&one,5);
+    display(one);
+    struct Node *two = NULL;
+    insertLastInAList(&two,100);
+    insertLastInAList(&two,200);
+    insertLastInAList(&two,300);
+    insertLastInAList(&two,400);
+    insertLastInAList(&two,500);   
+    display(two);
 
-    reverseUsingRecursion(NULL,first);
+    concatenateLists(one,two);
+    display(one);
 
-    display(first);
+    // reverseUsingRecursion(NULL,first); //dont forget to last = first, before calling this fn
 
     return 0;
 }
