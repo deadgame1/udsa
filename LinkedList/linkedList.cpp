@@ -509,6 +509,19 @@ struct Node * merge2Lists(struct Node *one, struct Node *two)
 {
     struct Node *three = NULL, *lastOfThree = NULL;
 
+    if(!one && !two)
+    {
+        return NULL;
+    }
+    if(!one)
+    {
+        return two;
+    }
+    if(!two)
+    {
+        return one;
+    }
+
     if(one->data < two->data)
     {
         three = lastOfThree = one;
