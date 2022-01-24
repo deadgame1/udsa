@@ -45,12 +45,24 @@ void displayCircularList(struct Node *head)
     cout<<endl;
 }
 
+struct Node *globalList = NULL;
+void displayCircularListUsingRecursion(struct Node *p)
+{
+    static int flag = 0;
+    if(p != globalList || flag == 0){
+        flag = 1;
+        cout<<p->data<<" ";
+        displayCircularListUsingRecursion(p->next);
+    }
+}
+
 int main()
 {
     struct Node *list = new Node;
-    int A[5] = {3,5,7,9,10};
-    struct Node *head = createCircularList(A,5,list);
-    displayCircularList(head);
+    int A[5] = {3,5,7,9,11};
+    globalList = createCircularList(A,5,list);
+    displayCircularListUsingRecursion(globalList);
+    cout<<endl;
     
     return 0;
 }
