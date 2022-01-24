@@ -76,7 +76,7 @@ void insert(int position, int value)
         return;
     if(position == 0)
     {
-        if(globalList == NULL){
+        if(globalList == NULL){ //handling the case where list is empty
             globalList = t;
             globalList->next = globalList;
         }
@@ -98,6 +98,43 @@ void insert(int position, int value)
     }
 }
 
+int deleteNode(int position)
+{
+    int x = -1, i;
+    struct Node *p = globalList;
+    if(position < 1 || position > length(p))
+        return;
+    if(position == 1)//deleting HEAD node
+    {
+        x = p->data;
+        while(p->next!=globalList)
+            p = p->next;
+        if(p == globalList)
+        {
+            delete globalList;
+            globalList=NULL;
+        }
+        else
+        {
+            p->next = globalList->next;
+            delete globalList;
+            globalList = p->next;
+        }
+        
+    }
+    else
+    {
+        for(i=0;i<position-2;i++)
+            p=p->next;
+        struct Node *t = p->next;
+        p->next = t->next;
+        x=t->data;
+        delete t;
+    }
+
+    return x;
+}
+
 int main()
 {
     int A[5] = {3,5,7,9,11};
@@ -107,9 +144,9 @@ int main()
     //insert(2,8);
     //insert(3,12);
     //insert(4,16);
-    insert(0,20);
+    insert(7,2);
 
-    displayCircularList(globalList);
+    deleteNode(1);
     //cout<<length(globalList);
 
     return 0;
