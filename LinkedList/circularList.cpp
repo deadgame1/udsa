@@ -72,6 +72,8 @@ void insert(int position, int value)
     int i;
     struct Node *p = globalList, *t = new Node;
     t->data = value;
+    if(position < 0 || position > length(p))
+        return;
     if(position == 0)
     {
         if(globalList == NULL){
@@ -108,7 +110,7 @@ int main()
     insert(0,20);
 
     displayCircularList(globalList);
-    cout<<length(globalList);
+    //cout<<length(globalList);
 
     return 0;
 }
