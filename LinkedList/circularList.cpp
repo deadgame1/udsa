@@ -50,6 +50,8 @@ void displayCircularListUsingRecursion(struct Node *p)
     flag = 0;
 }
 
+
+
 void insert(int position, int value)
 {
     int i;
@@ -58,13 +60,16 @@ void insert(int position, int value)
     if(position == 0)
     {
         if(globalList == NULL){
-            t->next = t;
             globalList = t;
-        }else{
+            globalList->next = globalList;
+        }
+        else
+        {
             while(p->next != globalList)
                 p = p->next;
             p->next = t;
             t->next = globalList;
+            globalList = t;
         }
     }else{
         for(i=0;i<position-1;i++)
