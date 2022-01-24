@@ -31,6 +31,10 @@ void createCircularList(int *A, int n)
 void displayCircularList(struct Node *head)
 {
     struct Node *p = head;
+    if(!p)
+    {
+        return;
+    }
     do
     {
         cout<<p->data<<" ";
@@ -103,7 +107,7 @@ int deleteNode(int position)
     int x = -1, i;
     struct Node *p = globalList;
     if(position < 1 || position > length(p))
-        return;
+        return x;
     if(position == 1)//deleting HEAD node
     {
         x = p->data;
@@ -137,16 +141,24 @@ int deleteNode(int position)
 
 int main()
 {
-    int A[5] = {3,5,7,9,11};
-    createCircularList(A,5);
-    displayCircularList(globalList);
+    //int A[2] = {3,5};
+    //createCircularList(A,2);
+    //displayCircularList(globalList);
     //insert(1,4);
     //insert(2,8);
     //insert(3,12);
     //insert(4,16);
-    insert(7,2);
 
-    deleteNode(1);
+    insert(0,3);
+    insert(1,5);
+    insert(2,7);
+
+    displayCircularList(globalList);
+
+    //deleteNode(1);
+
+    //displayCircularList(globalList);
+
     //cout<<length(globalList);
 
     return 0;
