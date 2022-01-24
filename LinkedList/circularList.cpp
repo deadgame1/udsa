@@ -50,7 +50,22 @@ void displayCircularListUsingRecursion(struct Node *p)
     flag = 0;
 }
 
+int length(struct Node *p)
+{
+    int count = 0;
+    if(p==NULL)
+    {
+        return count;
+    }
+    struct Node *t = p;
+    do
+    {
+        count++;
+        t = t->next;
+    } while (t != p);
 
+    return count;
+}
 
 void insert(int position, int value)
 {
@@ -93,6 +108,7 @@ int main()
     insert(0,20);
 
     displayCircularList(globalList);
+    cout<<length(globalList);
 
     return 0;
 }
