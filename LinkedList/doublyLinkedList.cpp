@@ -16,7 +16,7 @@ struct Node * intializeDoublyLinkedList(struct Node *f, int A[], int n)
     f->prev=f->next = NULL;
     f->data=A[0];
     t=f;
-    for(i=0;i<n;i++)
+    for(i=1;i<n;i++)
     {
         struct Node *n=new Node;
         n->data=A[i];
@@ -28,11 +28,23 @@ struct Node * intializeDoublyLinkedList(struct Node *f, int A[], int n)
 
     return f;
 }
+
+void displayList(struct Node* f)
+{
+    while(f)
+    {
+        cout<<f->data<<" ";
+        f=f->next;
+    }
+    cout<<endl;
+}
+
 int main()
 {
     struct Node *first = new Node;
     int A[6]={1,3,5,7,9,11};
     first=intializeDoublyLinkedList(first,A,6);
+    displayList(first);
 
     return 0;
 }
