@@ -39,11 +39,22 @@ void displayList(struct Node* f)
     cout<<endl;
 }
 
+int length(struct Node* f)
+{
+    int count=0;
+    while(f)
+    {
+        count++;
+        f=f->next;
+    }
+    return count;
+}
 int main()
 {
     struct Node *first = new Node;
     int A[6]={1,3,5,7,9,11};
     first=intializeDoublyLinkedList(first,A,6);
+    cout<<length(first)<<endl;
     displayList(first);
 
     return 0;
