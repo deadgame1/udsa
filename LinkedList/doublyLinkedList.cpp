@@ -7,15 +7,16 @@ struct Node
     struct Node *prev;
     int data;
     struct Node *next;
-};
+}*first=NULL;
 
 struct Node * intializeDoublyLinkedList(struct Node *f, int A[], int n)
 {
     int i;
     struct Node *t;
-    f->prev=f->next = NULL;
-    f->data=A[0];
-    t=f;
+    first=new Node;
+    first->prev=first->next = NULL;
+    first->data=A[0];
+    t=first;
     for(i=1;i<n;i++)
     {
         struct Node *n=new Node;
@@ -88,20 +89,46 @@ void insert(struct Node* f, int position, int value)
     }
 }
 
+int deleteNode(struct Node* p, int position)
+{
+    int x=-1;
+    if(position<0 || position>length(p))
+        return x;
+    if(position==1)
+    {
+        x=first->data;
+        first=first->next;
+        if(first)
+            first->prev=NULL;
+        delete p;
+    }
+    else
+    {
+        for(int i=0;i<position-1;i++)
+            p=p->next;
+        x=p->data;
+        p->prev->next=p->next;
+        if(p->next)
+            p->next->prev=p->prev;
+        delete p;
+    }
+
+    return x;
+}
 int main()
 {
-    struct Node *first=new Node;
-    first->data=-1;//first node is unitialized
-
     int A[6]={1,3,5,7,9,11};
-    //first=intializeDoublyLinkedList(first,A,6);
-    //cout<<length(first)<<endl;
-
-    insert(first,0,5);
-    insert(first,1,15);
-    insert(first,2,25);
-    cout<<length(first)<<endl;
+    intializeDoublyLinkedList(first,A,6);
     displayList(first);
+    cout<<length(first)<<endl;
+
+    deleteNode(first,1);
+    displayList(first);
+    // insert(first,0,5);
+    // insert(first,1,15);
+    // insert(first,2,25);
+    // cout<<length(first)<<endl;
+    // displayList(first);
 
     return 0;
 }
