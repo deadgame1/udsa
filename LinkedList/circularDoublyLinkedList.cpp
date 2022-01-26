@@ -12,19 +12,21 @@ struct Node
 void createList(int A[], int n)
 {
     int i;
+    first=new Node;
     first->data=A[0];
     first->next=NULL;
     struct Node *t=first;
     for(i=1;i<n;i++)
     {
-        struct Node *newNode = new Node;
-        newNode->data=A[i];
-        newNode->prev=t;
-        newNode->next=NULL;
-        t=newNode;
+        struct Node *n = new Node;
+        n->data=A[i];
+        n->prev=t;
+        n->next=NULL;
+        t->next=n;
+        t=n;
     }
+    first->prev=t;
     t->next=first;
-    //first->prev=??
 }
 
 void display(struct Node* head)
@@ -32,7 +34,7 @@ void display(struct Node* head)
     struct Node* p=head;
     do
     {
-        cout<<p->data<<endl;
+        cout<<p->data<<" ";
         p=p->next;
     } while (p!=head);
     cout<<endl;
@@ -42,7 +44,7 @@ int main()
 {
     int A[5]={3,5,7,9,11};
     createList(A,5);
-    //display(first);
+    display(first);
 
     return 0;
 }
