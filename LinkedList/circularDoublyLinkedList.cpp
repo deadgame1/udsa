@@ -27,6 +27,17 @@ void createList(int A[], int n)
     //first->prev=??
 }
 
+void display(struct Node* head)
+{
+    struct Node* p=head;
+    do
+    {
+        cout<<p->data<<endl;
+        p=p->next;
+    } while (p!=head);
+    cout<<endl;
+}
+
 int main()
 {
     int A[5]={3,5,7,9,11};
