@@ -124,7 +124,7 @@ int main()
 
     deleteNode(first,1);
     displayList(first);
-    // insert(first,0,5);
+ insert(first,0,5);
     // insert(first,1,15);
     // insert(first,2,25);
     // cout<<length(first)<<endl;
