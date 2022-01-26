@@ -40,11 +40,27 @@ void display(struct Node* head)
     cout<<endl;
 }
 
+int count(struct Node* head)
+{
+    int count=0;
+    struct Node *p=head;
+    int flag=0;
+    while(p!=head || flag==0)
+    {
+        flag++;
+        count++;
+        p=p->next;
+    }
+
+    return count;
+}
+
+
 int main()
 {
     int A[5]={3,5,7,9,11};
     createList(A,5);
     display(first);
-
+    cout<<count(first)<<endl;
     return 0;
 }
