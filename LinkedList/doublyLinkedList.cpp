@@ -115,14 +115,31 @@ int deleteNode(struct Node* p, int position)
 
     return x;
 }
+
+void reverseDoublyLinkedList()
+{
+    struct Node *p=first,*t;
+
+    while(p)
+    {
+        t=p->next;
+        p->next=p->prev;
+        p->prev=t;
+        p=p->prev;
+        if(p && p->next==NULL)
+            first=p;
+    }
+}
+
 int main()
 {
     int A[6]={1,3,5,7,9,11};
     intializeDoublyLinkedList(first,A,6);
     displayList(first);
-    cout<<length(first)<<endl;
+    //cout<<length(first)<<endl;
 
-    deleteNode(first,1);
+    //deleteNode(first,1);
+    reverseDoublyLinkedList();
     displayList(first);
     // insert(first,0,5);
     // insert(first,1,15);
