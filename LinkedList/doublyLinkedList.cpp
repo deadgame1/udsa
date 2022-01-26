@@ -92,7 +92,7 @@ void insert(struct Node* f, int position, int value)
 int deleteNode(struct Node* p, int position)
 {
     int x=-1;
-    if(position<0 || position>length(p))
+    if(position<1 || position>length(p))
         return x;
     if(position==1)
     {
@@ -124,7 +124,7 @@ int main()
 
     deleteNode(first,1);
     displayList(first);
- insert(first,0,5);
+    // insert(first,0,5);
     // insert(first,1,15);
     // insert(first,2,25);
     // cout<<length(first)<<endl;
