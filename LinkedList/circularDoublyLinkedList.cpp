@@ -92,12 +92,37 @@ void insert(struct Node* head, int pos, int x)
     }
 }
 
+int deleteNode(int pos)
+{
+    struct Node*p=first;
+    int x=-1,i;
+    if(pos<1 || pos>count(p))
+        return x;
+    x=p->data;
+    if(pos==1)
+    {
+        p->prev->next=p->next;
+        p->next->prev=p->prev;
+        first=p->next;
+    }   
+    else
+    {
+        for(i=0;i<pos-1;i++)
+            p=p->next;
+        p->prev->next=p->next;
+        p->next->prev=p->prev;
+    }
+    delete p;
+    return x;
+}
 int main()
 {
     int A[5]={3,5,7,9,11};
     createList(A,5);
     display(first); 
     insert(first,5,14);
+    display(first);
+    deleteNode(3);
     display(first);
     //cout<<count(first)<<endl;
     return 0;
