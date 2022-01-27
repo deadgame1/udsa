@@ -10,7 +10,7 @@ struct Node{
 //global pointers
 struct Node *first=NULL; 
 struct Node *last=NULL; 
-
+struct Node *f2=NULL; 
 void create(int A[],int n)
 {
     int i;
@@ -26,6 +26,25 @@ void create(int A[],int n)
       newNode->next = NULL;
       last->next = newNode;
       last=newNode;  
+    }
+}
+
+void create2(int A[],int n)
+{
+    int i;
+    struct Node *newNode, *t;
+    f2 = new Node;
+    f2->data = A[0];
+    f2->next = NULL;
+    t=f2;
+    //last=first;
+    for(i=1;i<n;i++)
+    {
+      newNode = new Node;
+      newNode->data = A[i];
+      newNode->next = NULL;
+      t->next = newNode;
+      t=newNode;  
     }
 }
 
@@ -592,9 +611,13 @@ int isLOOP(struct Node *f)
 }
 int main()
 {
-    //int A[] = {3,5,7,9,11,13};
+    int A[] = {3,5,7,9,11};
+    int B[] = {2,4,6,8,10};
     //int A[] = {1};
-    //create(A,0);
+    create(A,5);
+    create2(B,5);
+    display(first);
+    display(f2);
     //struct Node *result;
     // result = ImprovedLinearSearch(first,13);
     // if(result)
@@ -604,17 +627,18 @@ int main()
     //struct Node * tempVar;
     //display(first);
 
-    struct Node *one = NULL;
-    insertLastInAList(&one,2);
-    insertLastInAList(&one,4);
-    insertLastInAList(&one,6);
-    insertLastInAList(&one,8);
-    display(one);
+    // struct Node *one = NULL;
+    // insertLastInAList(&one,2);
+    // insertLastInAList(&one,4);
+    // insertLastInAList(&one,6);
+    // insertLastInAList(&one,8);
+    // display(one);
+
     //struct Node * lastNode = getNodeWithValue(one,8);
     //struct Node *t = one->next;
     //struct Node *lastNode = one->next->next->next;
     //lastNode->next = t;
-    cout<<isLOOP(one)<<endl;
+    //cout<<isLOOP(one)<<endl;
 
     // struct Node *two = NULL;
     // insertLastInAList(&two,10);
