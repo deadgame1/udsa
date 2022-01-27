@@ -609,6 +609,25 @@ int isLOOP(struct Node *f)
     else    
         return 0;
 }
+/**
+ * @brief finding the middle of a singly linked linear list using 2 pointers
+ * 1st pointer moves by 1, 2nd pointer moves by 2
+ * @param head 
+ * @return struct Node* 
+ */
+struct Node * findMid(struct Node *head)
+{
+    struct Node *p=head, *q=head;
+    while(q)
+    {
+        q=q->next;
+        if(q) q=q->next;
+        if(q) p=p->next;
+    }
+
+    return p;
+}
+
 int main()
 {
     int A[] = {3,5,7,9,11};
@@ -616,8 +635,8 @@ int main()
     //int A[] = {1};
     create(A,5);
     create2(B,5);
-    display(first);
-    display(f2);
+    cout<<"Mid of first list - "<<findMid(first)->data<<endl;
+    cout<<"Mid of second list - "<<findMid(f2)->data<<endl;
     //struct Node *result;
     // result = ImprovedLinearSearch(first,13);
     // if(result)
