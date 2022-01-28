@@ -51,6 +51,15 @@ int pop(struct Stack *st)
 
     return x;
 }
+
+int stackTop(struct Stack st)
+{
+    if(!isEmpty(st))
+        return st.s[st.top];
+    else
+        return -1;
+}
+
 int main()
 {
     int i,x;
@@ -70,7 +79,9 @@ int main()
     display(myStack);
     cout<<pop(&myStack)<<endl;
     cout<<pop(&myStack)<<endl;
-    cout<<pop(&myStack)<<endl;
+    //cout<<pop(&myStack)<<endl;
+
+    cout<<stackTop(myStack)<<endl;
 
     return 0;
 }
