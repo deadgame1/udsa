@@ -23,6 +23,14 @@ void push(struct Stack *st, int value)
         st->s[++st->top]=value;
 }
 
+void display(struct Stack st)
+{
+    int i;
+    for(i=st.top;i>-1;i--)
+        cout<<st.s[i]<<" ";
+    cout<<endl;
+}
+
 int main()
 {
     int i,x;
@@ -38,6 +46,8 @@ int main()
         cin>>x;
         push(&myStack, x);
     }
+
+    display(myStack);
 
     return 0;
 }
