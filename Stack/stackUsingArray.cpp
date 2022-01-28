@@ -60,6 +60,16 @@ int stackTop(struct Stack st)
         return -1;
 }
 
+int peek(struct Stack st, int position)
+{
+    if(position < 1 || position > st.size)
+    {
+        cout<<"Invalid Index"<<endl;
+        return -1;
+    }
+
+    return st.s[st.top-position+1];
+}
 int main()
 {
     int i,x;
@@ -77,11 +87,13 @@ int main()
     }
 
     display(myStack);
-    cout<<pop(&myStack)<<endl;
-    cout<<pop(&myStack)<<endl;
+    //cout<<pop(&myStack)<<endl;
+    //cout<<pop(&myStack)<<endl;
     //cout<<pop(&myStack)<<endl;
 
-    cout<<stackTop(myStack)<<endl;
+    //cout<<stackTop(myStack)<<endl;
+
+    cout<<peek(myStack,3)<<endl;
 
     return 0;
 }
