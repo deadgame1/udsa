@@ -28,7 +28,10 @@ int isEmpty(struct Stack st)
 void push(struct Stack *st, int value)
 {
     if(!isFull(*st))
+    {
         st->s[++st->top]=value;
+        st->size++;
+    }
     else    
         cout<<"Stack overflow"<<endl;
 }
@@ -45,7 +48,11 @@ int pop(struct Stack *st)
 {
     int x=-1;
     if(!isEmpty(*st))
-        return x=st->s[st->top--];
+    {    
+        x=st->s[st->top--];
+        st->size--;
+        return x;
+    }
     else    
         cout<<"Stack underflow"<<endl;
 
@@ -70,6 +77,7 @@ int peek(struct Stack st, int position)
 
     return st.s[st.top-position+1];
 }
+
 int main()
 {
     int i,x;
