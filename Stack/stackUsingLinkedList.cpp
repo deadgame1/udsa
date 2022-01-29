@@ -8,6 +8,10 @@ class Node
         int data;
     public:
         Node *next;
+        Node()
+        {
+            this->next=NULL;
+        };
         Node(int x, Node *p)
         {
             this->data=x;
@@ -37,6 +41,8 @@ public:
     void push(int x);
     void display();
     int pop();
+    int isFull();
+    int isEmpty();
 };
 
 stackLL::stackLL(Node *p)
@@ -83,6 +89,19 @@ void stackLL::display()
     cout<<endl;
 }
 
+int stackLL::isFull()
+{
+    Node *p = new Node();
+    if(p == NULL)
+        return 1;
+    return 0;
+}
+
+int stackLL::isEmpty()
+{
+    return this->top == NULL ? 1 : 0;
+}
+
 int main()
 {
     stackLL myStack = stackLL();
@@ -92,8 +111,11 @@ int main()
     myStack.display();
 
     cout<<myStack.pop()<<endl;
+    cout<<myStack.pop()<<endl;
+    cout<<myStack.pop()<<endl;
+    cout<<myStack.isEmpty()<<endl;
 
-    myStack.display();
+    //myStack.display();
 
     return 0;
 }
