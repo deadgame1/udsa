@@ -47,10 +47,7 @@ int pop(struct Stack *st)
 {
     int x=-1;
     if(!isEmpty(*st))
-    {    
-        x=st->s[st->top--];
-        return x;
-    }
+        return st->s[st->top--];
     else    
         cout<<"Stack underflow"<<endl;
 
@@ -61,8 +58,7 @@ int stackTop(struct Stack st)
 {
     if(!isEmpty(st))
         return st.s[st.top];
-    else
-        return -1;
+    return -1;
 }
 
 int peek(struct Stack st, int position)
@@ -83,12 +79,6 @@ void create(struct Stack *st)
     cin>>st->size;
     st->top = -1;
     st->s = new int[st->size];
-    for(i=0;i<st->size;i++)
-    {
-        cout<<"Enter Value no. "<<i+1<<" - ";
-        cin>>x;
-        push(st, x);
-    }
 }
 
 int main()
@@ -96,7 +86,14 @@ int main()
     int i,x;
     struct Stack myStack;
     create(&myStack);
+
+    push(&myStack,10);
+    push(&myStack,20);
+    push(&myStack,30);
+    
+    cout<<stackTop(myStack)<<endl;
     display(myStack);
+
     //cout<<pop(&myStack)<<endl;
     //cout<<pop(&myStack)<<endl;
     //cout<<pop(&myStack)<<endl;
