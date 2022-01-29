@@ -43,6 +43,7 @@ public:
     int pop();
     int isFull();
     int isEmpty();
+    int peek(int position);
 };
 
 stackLL::stackLL(Node *p)
@@ -102,6 +103,18 @@ int stackLL::isEmpty()
     return this->top == NULL ? 1 : 0;
 }
 
+int stackLL::peek(int position)
+{
+    int i;
+    Node *p=this->top;
+    for(i=0;i<position-1 && p!=NULL;i++)
+        p=p->next;
+    if(p)
+        return p->getData();
+    return -1;
+
+}
+
 int main()
 {
     stackLL myStack = stackLL();
@@ -110,10 +123,10 @@ int main()
     myStack.push(30);
     myStack.display();
 
-    cout<<myStack.pop()<<endl;
-    cout<<myStack.pop()<<endl;
-    cout<<myStack.pop()<<endl;
-    cout<<myStack.isEmpty()<<endl;
+    //cout<<myStack.pop()<<endl;
+    //cout<<myStack.pop()<<endl;
+    //cout<<myStack.pop()<<endl;
+    cout<<myStack.peek(2)<<endl;
 
     //myStack.display();
 
