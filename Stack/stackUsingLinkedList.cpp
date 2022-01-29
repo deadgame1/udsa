@@ -36,6 +36,7 @@ public:
     ~stackLL();
     void push(int x);
     void display();
+    int pop();
 };
 
 stackLL::stackLL(Node *p)
@@ -51,10 +52,24 @@ stackLL::~stackLL()
 void stackLL::push(int x)
 {
     Node *p = new Node(x,this->top);
-    //&Node(x,this->top);
     if(p == NULL)
         cout<<"Stack overflow"<<endl;
     this->top=p;
+}
+
+int stackLL::pop()
+{
+    if(this->top == NULL)
+    {   
+        cout<<"Stack underflow"<<endl;
+        return -1;
+    }
+    Node *p=this->top;
+    int x = this->top->getData();
+    this->top=this->top->next;
+    delete p;
+
+    return x;
 }
 
 void stackLL::display()
@@ -75,6 +90,10 @@ int main()
     myStack.push(20);
     myStack.push(30);
     myStack.display();
-    
+
+    cout<<myStack.pop()<<endl;
+
+    myStack.display();
+
     return 0;
 }
