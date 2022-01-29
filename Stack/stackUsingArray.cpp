@@ -30,7 +30,6 @@ void push(struct Stack *st, int value)
     if(!isFull(*st))
     {
         st->s[++st->top]=value;
-        st->size++;
     }
     else    
         cout<<"Stack overflow"<<endl;
@@ -50,7 +49,6 @@ int pop(struct Stack *st)
     if(!isEmpty(*st))
     {    
         x=st->s[st->top--];
-        st->size--;
         return x;
     }
     else    
@@ -78,22 +76,26 @@ int peek(struct Stack st, int position)
     return st.s[st.top-position+1];
 }
 
+void create(struct Stack *st)
+{
+    int i,x;
+    cout<<"Enter size ";
+    cin>>st->size;
+    st->top = -1;
+    st->s = new int[st->size];
+    for(i=0;i<st->size;i++)
+    {
+        cout<<"Enter Value no. "<<i+1<<" - ";
+        cin>>x;
+        push(st, x);
+    }
+}
+
 int main()
 {
     int i,x;
     struct Stack myStack;
-    cout<<"Enter size ";
-    cin>>myStack.size;
-    myStack.s = new int[myStack.size];
-    myStack.top = -1;
-
-    for(i=0;i<myStack.size;i++)
-    {
-        cout<<"Enter Value no. "<<i+1<<" - ";
-        cin>>x;
-        push(&myStack, x);
-    }
-
+    create(&myStack);
     display(myStack);
     //cout<<pop(&myStack)<<endl;
     //cout<<pop(&myStack)<<endl;
@@ -101,7 +103,7 @@ int main()
 
     //cout<<stackTop(myStack)<<endl;
 
-    cout<<peek(myStack,3)<<endl;
+    //cout<<peek(myStack,3)<<endl;
 
     return 0;
 }
