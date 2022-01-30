@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 template <class T>
@@ -30,8 +31,8 @@ class stackLL
 {
 private:
     /* data */
-    Node<B> *top;
 public:
+    Node<B> *top;
     stackLL()
     {
         this->top=NULL;
@@ -44,6 +45,7 @@ public:
     int isFull();
     int isEmpty();
     B peek(int position);
+    B stackTop();
 };
 
 template <class B>
@@ -124,6 +126,15 @@ B stackLL<B>::peek(int position)
 
 }
 
+template <class B>
+B stackLL<B>::stackTop()
+{
+    if(!this->isEmpty())
+        return this->top->getData();
+    else    
+        return -1;
+}
+
 int checkParenthesis(stackLL<char> stk, string str)
 {
     int i;
@@ -146,15 +157,68 @@ int checkParenthesis(stackLL<char> stk, string str)
     return stk.isEmpty() ? 1 : 0;  
 }
 
+
+int isOperator(char x)
+{
+    if(x=='+' || x=='-' || x=='*' || x=='/' || x=='^' || x=='!')
+        return 1;
+    else 
+        return 0;
+}
+
+int operatorPrecedence(char x)
+{
+    if(x=='+') return 1;
+    if(x=='-') return 1;
+    if(x=='*') return 2;
+    if(x=='/') return 2;
+    if(x=='^') return 3;
+    if(x=='!') return 4;
+    return 5;
+}
+
+char * infixToPostfix(char *infix, stackLL<char> stk)
+{
+    char * postfix = new char[strlen(infix) + 1];
+    stk.top=NULL;
+    int i=0;
+    int j=0;
+    char x;
+    while(infix[i]!='\0')
+    {
+        if(stk.isEmpty())
+            stk.push(infix[i++]);
+        else
+        {
+            x=stk.stackTop();
+            if(operatorPrecedence(infix[i]) > operatorPrecedence(x))
+                stk.push(infix[i++]);
+            else
+                postfix[j++] = stk.pop();
+        }   
+    }
+    while(!stk.isEmpty())
+        postfix[j++]=stk.pop();
+    postfix[j] = '\0';
+
+    return postfix;
+}
 int main()
 {
     stackLL<char> myStack = stackLL<char>();
-    // myStack.push(10);
-    // myStack.push(20);
-    // myStack.push(30);
-    // myStack.display();
+    char input[] = "a^b^c";
+    char *output = infixToPostfix(input, myStack);
+    cout<<output<<endl;
 
-    string A="{[]([]}";
+
+
+    // stackLL<char> myStack = stackLL<char>();
+    // myStack.push('a');
+    // myStack.pop();
+    // cout<<myStack.pop();
+    //myStack.display();
+
+    //string A="{[]([]}";
     //cout<<"Enter expression"<<endl;
     //cin>>A;
     // int result = checkParenthesis(myStack,A);
