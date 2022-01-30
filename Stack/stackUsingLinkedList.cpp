@@ -1,18 +1,18 @@
 #include <iostream>
 
 using namespace std;
-
+template <class T>
 class Node
 {
     private:
-        int data;
+        T data;
     public:
         Node *next;
         Node()
         {
             this->next=NULL;
         };
-        Node(int x, Node *p)
+        Node(T x, Node *p)
         {
             this->data=x;
             if(p != NULL)
@@ -20,69 +20,74 @@ class Node
             else            
                 this->next=NULL;
         };
-        int getData()
+        T getData()
         {
             return this->data;
         }
 };
-
+template <class B>
 class stackLL
 {
 private:
     /* data */
-    Node *top;
+    Node<B> *top;
 public:
     stackLL()
     {
         this->top=NULL;
     };
-    stackLL(Node *p);
+    stackLL(Node<B> *p);
     ~stackLL();
-    void push(int x);
+    void push(B x);
     void display();
-    int pop();
+    B pop();
     int isFull();
     int isEmpty();
-    int peek(int position);
+    B peek(int position);
 };
 
-stackLL::stackLL(Node *p)
+template <class B>
+stackLL<B>::stackLL(Node<B> *p)
 {
     this->top=p;
 }
 
-stackLL::~stackLL()
+template <class B>
+stackLL<B>::~stackLL()
 {
     delete this->top;
 }
 
-void stackLL::push(int x)
+template <class B>
+void stackLL<B>::push(B x)
 {
-    Node *p = new Node(x,this->top);
+    Node<B> *p = new Node<B>(x,this->top);
     if(p == NULL)
         cout<<"Stack overflow"<<endl;
     else
         this->top=p;
 }
 
-int stackLL::pop()
+template <class B>
+B stackLL<B>::pop()
 {
     if(this->top == NULL)
     {   
         cout<<"Stack underflow"<<endl;
         return -1;
     }
-    Node *p=this->top;
-    int x = this->top->getData();
+    Node<B> *p=this->top;
+    B x = this->top->getData();
     this->top=this->top->next;
     delete p;
 
     return x;
 }
 
-void stackLL::display()
+template <class B>
+void stackLL<B>::display()
 {
-    Node *p=this->top;
+    Node<B> *p=this->top;
     while(p)
     {
         cout<<p->getData()<<" ";
@@ -91,23 +96,26 @@ void stackLL::display()
     cout<<endl;
 }
 
-int stackLL::isFull()
+template <class B>
+int stackLL<B>::isFull()
 {
-    Node *p = new Node();
+    Node<B> *p = new Node<B>();
     if(p == NULL)
         return 1;
     return 0;
 }
 
-int stackLL::isEmpty()
+template <class B>
+int stackLL<B>::isEmpty()
 {
     return this->top == NULL ? 1 : 0;
 }
 
-int stackLL::peek(int position)
+template <class B>
+B stackLL<B>::peek(int position)
 {
     int i;
-    Node *p=this->top;
+    Node<B> *p=this->top;
     for(i=0;i<position-1 && p!=NULL;i++)
         p=p->next;
     if(p)
@@ -116,42 +124,45 @@ int stackLL::peek(int position)
 
 }
 
-int checkParenthesis(stackLL stk, string str)
-{
-    int i,x;
-    for(i=0;i<str.length() && str[i] != '\0';i++)
-    {
-        if(str[i]=='(')stk.push(1);
-        else if(str[i]=='[')stk.push(2);  
-        else if(str[i]=='{')stk.push(3);  
-        else if(str[i]==')' || str[i]==']' || str[i]=='}')
-        {
-            if(stk.isEmpty()) return 0;
-            x=stk.pop();
-            if(str[i]==')' && x != 1) return 0;
-            if(str[i]==']' && x != 2) return 0;
-            if(str[i]=='}' && x != 3) return 0;
-        }
-    }
+// int checkParenthesis(stackLL stk, string str)
+// {
+//     int i,x;
+//     for(i=0;i<str.length() && str[i] != '\0';i++)
+//     {
+//         if(str[i]=='(')stk.push(1);
+//         else if(str[i]=='[')stk.push(2);  
+//         else if(str[i]=='{')stk.push(3);  
+//         else if(str[i]==')' || str[i]==']' || str[i]=='}')
+//         {
+//             if(stk.isEmpty()) return 0;
+//             x=stk.pop();
+//             if(str[i]==')' && x != 1) return 0;
+//             if(str[i]==']' && x != 2) return 0;
+//             if(str[i]=='}' && x != 3) return 0;
+//         }
+//     }
 
-    return stk.isEmpty() ? 1 : 0;  
-}
+//     return stk.isEmpty() ? 1 : 0;  
+// }
+
+
+
 int main()
 {
-    stackLL myStack = stackLL();
-    //myStack.push(10);
-    //myStack.push(20);
-    //myStack.push(30);
-    //myStack.display();
+    stackLL<int> myStack = stackLL<int>();
+    myStack.push(10);
+    myStack.push(20);
+    myStack.push(30);
+    myStack.display();
 
     string A="{[]([]}";
     //cout<<"Enter expression"<<endl;
     //cin>>A;
-    int result = checkParenthesis(myStack,A);
-    if(result==1)
-        cout<<"Parenthesis match"<<endl;
-    else    
-        cout<<"Parenthesis dont match"<<endl;
+    // int result = checkParenthesis(myStack,A);
+    // if(result==1)
+    //     cout<<"Parenthesis match"<<endl;
+    // else    
+    //     cout<<"Parenthesis dont match"<<endl;
 
     //cout<<myStack.pop()<<endl;
     //cout<<myStack.pop()<<endl;
