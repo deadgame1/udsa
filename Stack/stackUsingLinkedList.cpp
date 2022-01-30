@@ -116,27 +116,29 @@ int stackLL::peek(int position)
 
 }
 
-int checkParenthesis(stackLL stk, string stringToBeChecked)
+int checkParenthesis(stackLL stk, string str)
 {
     int i,x;
-    for(i=0;i<stringToBeChecked.length();i++)
+    for(i=0;i<str.length() && str[i] != '\0';i++)
     {
-        if(stringToBeChecked[i] == '(')
+        if(str[i]=='(')stk.push(1);
+        else if(str[i]=='[')stk.push(2);  
+        else if(str[i]=='{')stk.push(3);  
+        else if(str[i]==')' || str[i]==']' || str[i]=='}')
         {
-            stk.push(1);
-        }
-        else if(stringToBeChecked[i] == ')')
-        {
-            x = stk.pop();
-            if(x==-1)
+            if(stk.isEmpty())
+                return 0;
+            x=stk.pop();
+            if(str[i]==')' && x != 1)
+                return 0;
+            if(str[i]==']' && x != 2)
+                return 0;
+            if(str[i]=='}' && x != 3)
                 return 0;
         }
     }
 
-    if(stk.isEmpty() == 1)
-        return 1;
-    else
-        return 0;        
+    return stk.isEmpty() ? 1 : 0;  
 }
 int main()
 {
@@ -146,9 +148,9 @@ int main()
     //myStack.push(30);
     //myStack.display();
 
-    string A;
-    cout<<"Enter expression"<<endl;
-    cin>>A;
+    string A="{[]([]}";
+    //cout<<"Enter expression"<<endl;
+    //cin>>A;
     int result = checkParenthesis(myStack,A);
     if(result==1)
         cout<<"Parenthesis match"<<endl;
