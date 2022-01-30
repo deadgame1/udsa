@@ -126,15 +126,11 @@ int checkParenthesis(stackLL stk, string str)
         else if(str[i]=='{')stk.push(3);  
         else if(str[i]==')' || str[i]==']' || str[i]=='}')
         {
-            if(stk.isEmpty())
-                return 0;
+            if(stk.isEmpty()) return 0;
             x=stk.pop();
-            if(str[i]==')' && x != 1)
-                return 0;
-            if(str[i]==']' && x != 2)
-                return 0;
-            if(str[i]=='}' && x != 3)
-                return 0;
+            if(str[i]==')' && x != 1) return 0;
+            if(str[i]==']' && x != 2) return 0;
+            if(str[i]=='}' && x != 3) return 0;
         }
     }
 
