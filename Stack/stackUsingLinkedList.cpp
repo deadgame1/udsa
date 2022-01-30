@@ -124,36 +124,35 @@ B stackLL<B>::peek(int position)
 
 }
 
-// int checkParenthesis(stackLL stk, string str)
-// {
-//     int i,x;
-//     for(i=0;i<str.length() && str[i] != '\0';i++)
-//     {
-//         if(str[i]=='(')stk.push(1);
-//         else if(str[i]=='[')stk.push(2);  
-//         else if(str[i]=='{')stk.push(3);  
-//         else if(str[i]==')' || str[i]==']' || str[i]=='}')
-//         {
-//             if(stk.isEmpty()) return 0;
-//             x=stk.pop();
-//             if(str[i]==')' && x != 1) return 0;
-//             if(str[i]==']' && x != 2) return 0;
-//             if(str[i]=='}' && x != 3) return 0;
-//         }
-//     }
+int checkParenthesis(stackLL<char> stk, string str)
+{
+    int i;
+    char x;
+    for(i=0;i<str.length() && str[i] != '\0';i++)
+    {
+        if(str[i]=='(')stk.push('(');
+        else if(str[i]=='[')stk.push('[');  
+        else if(str[i]=='{')stk.push('{');  
+        else if(str[i]==')' || str[i]==']' || str[i]=='}')
+        {
+            if(stk.isEmpty()) return 0;
+            x=stk.pop();
+            if(str[i]==')' && x != '(') return 0;
+            if(str[i]==']' && x != '[') return 0;
+            if(str[i]=='}' && x != '{') return 0;
+        }
+    }
 
-//     return stk.isEmpty() ? 1 : 0;  
-// }
-
-
+    return stk.isEmpty() ? 1 : 0;  
+}
 
 int main()
 {
-    stackLL<int> myStack = stackLL<int>();
-    myStack.push(10);
-    myStack.push(20);
-    myStack.push(30);
-    myStack.display();
+    stackLL<char> myStack = stackLL<char>();
+    // myStack.push(10);
+    // myStack.push(20);
+    // myStack.push(30);
+    // myStack.display();
 
     string A="{[]([]}";
     //cout<<"Enter expression"<<endl;
