@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <math.h>
 
 using namespace std;
 template <class T>
@@ -211,13 +212,59 @@ char * infixToPostfix(char *infix, stackLL<char> stk)
 
     return postfix;
 }
+
+int evaluatePostfix(char *postfix)
+{
+    int result=-1;
+    stackLL<int> stk=stackLL<int>();
+    int i=0,operandA,operandB,tempResult;
+    while(postfix[i]!='\0')
+    {
+        if(isOperator(postfix[i]))
+        {
+            operandB=stk.pop();
+            operandA=stk.pop();
+            switch (postfix[i])
+            {
+            case '+':
+                tempResult=operandA+operandB;
+                break;
+            case '-':
+                tempResult=operandA-operandB;
+                break;
+            case '*':
+                tempResult=operandA*operandB;
+                break;
+            case '/':
+                tempResult=operandA/operandB;
+                break;
+            case '^':
+                tempResult=pow(operandA,operandB);
+                break;
+            default:
+                break;
+            }
+            stk.push(tempResult);
+            i++;
+        }
+        else
+        {
+            stk.push(postfix[i++] - '0');
+        }
+    }
+
+    return result=stk.pop();
+}
 int main()
 {
     stackLL<char> myStack = stackLL<char>();
     //char input[] = "a^b^c"; //abc^^
-    char input[] = "(a+b)*c-d^e^f";
+    //char input[] = "(a+b)*c-d^e^f";
+    char input[] = "(3+5)*6-2^2^2";
+    //char input[] = "234*+82/-";
     char *output = infixToPostfix(input, myStack);
-    cout<<output<<endl;
+    int result = evaluatePostfix(output);
+    cout<<result<<endl;
 
     // stackLL<char> myStack = stackLL<char>();
     // myStack.push('a');
