@@ -61,6 +61,24 @@ public:
     {
         return front==rear;
     }
+    int first()
+    {
+        if(isEmpty())
+        {   
+            cout<<"Queue is empty"<<endl;
+            return -1;
+        }
+        return Q[front+1];
+    }
+    int last()
+    {
+        if(isEmpty())
+        {   
+            cout<<"Queue is empty"<<endl;
+            return -1;
+        }
+        return Q[rear];
+    }
 };
 
 int main()
