@@ -41,13 +41,29 @@ public:
         }
         return x;
     };
+    void display()
+    {   
+        if(front==rear)
+        {
+            cout<<"Queue is empty"<<endl;
+            return;
+        }
+        int i;
+        for(i=front+1;i<=rear;i++)
+            cout<<Q[i]<<" ";
+        cout<<endl;
+    };
 };
 
 int main()
 {
-    Queue myQ=Queue(7);
-    myQ.enqueue(101);
-    cout<<myQ.dequeue();
+    Queue myQ=Queue(4);
+    myQ.enqueue(3);
+    myQ.enqueue(5);
+    myQ.enqueue(7);
+    myQ.enqueue(9);
+    myQ.dequeue();
+    myQ.display();
 
     return 0;
 }
