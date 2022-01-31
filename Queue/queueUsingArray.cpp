@@ -53,6 +53,14 @@ public:
             cout<<Q[i]<<" ";
         cout<<endl;
     };
+    int isFull()
+    {
+        return rear==size-1;
+    };
+    int isEmpty()
+    {
+        return front==rear;
+    }
 };
 
 int main()
