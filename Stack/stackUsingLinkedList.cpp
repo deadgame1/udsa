@@ -160,26 +160,29 @@ int checkParenthesis(stackLL<char> stk, string str)
 
 int isOperator(char x)
 {
-    if(x=='+' || x=='-' || x=='*' || x=='/' || x=='^' || x=='!')
+    if(x=='+' || x=='-' || x=='*' || x=='/' || x=='^' || x=='!' || x=='(' || x==')')
         return 1;
     else 
         return 0;
 }
 
-int operatorPrecedence(char x)
+int operatorPrecedence(char x, int outStack=1)
 {
-    if(x=='+') return 1;
-    if(x=='-') return 1;
-    if(x=='*') return 2;
-    if(x=='/') return 2;
-    if(x=='^') return 3;
-    if(x=='!') return 4;
-    return 5;
+    if(x=='+' || x=='-') 
+        return outStack==1 ? 1 : 2;
+    if(x=='*' || x=='/') 
+        return outStack==1 ? 3 : 4;
+    if(x=='^') 
+        return outStack==1 ? 6 : 5;
+    if(x=='(') 
+        return outStack==1 ? 7 : 0;
+    if(x==')') return 0;
+    return 8;
 }
 
 char * infixToPostfix(char *infix, stackLL<char> stk)
 {
-    char * postfix = new char[strlen(infix) + 1];
+    char * postfix = new char[strlen(infix) + sizeof(char)*1];
     stk.top=NULL;
     int i=0;
     int j=0;
@@ -191,26 +194,30 @@ char * infixToPostfix(char *infix, stackLL<char> stk)
         else
         {
             x=stk.stackTop();
-            if(operatorPrecedence(infix[i]) > operatorPrecedence(x))
+            if(operatorPrecedence(infix[i]) > operatorPrecedence(x,2))
                 stk.push(infix[i++]);
+            else if(operatorPrecedence(infix[i]) == operatorPrecedence(x,2))
+            {   stk.pop(); 
+                i++;
+                //only in the case of opening and closing brackets precedence will be equal and we will not print () it to output.
+            }
             else
                 postfix[j++] = stk.pop();
         }   
     }
     while(!stk.isEmpty())
         postfix[j++]=stk.pop();
-    postfix[j] = '\0';
+    //postfix[j] = '\0';
 
     return postfix;
 }
 int main()
 {
     stackLL<char> myStack = stackLL<char>();
-    char input[] = "a^b^c";
+    //char input[] = "a^b^c"; //abc^^
+    char input[] = "(a+b)*c-d^e^f";
     char *output = infixToPostfix(input, myStack);
     cout<<output<<endl;
-
-
 
     // stackLL<char> myStack = stackLL<char>();
     // myStack.push('a');
