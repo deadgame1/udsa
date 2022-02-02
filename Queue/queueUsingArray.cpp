@@ -36,7 +36,7 @@ public:
         else
         {
             x=Q[front+1];
-            Q[front+1]=0;
+            Q[front+1]=NULL;
             front++;
         }
         return x;
