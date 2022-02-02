@@ -83,7 +83,7 @@ public:
 
 int main()
 {
-    Queue myQ=Queue(4);
+    Queue myQ=Queue(5);
     myQ.enqueue(3);
     myQ.enqueue(5);
     myQ.enqueue(7);
