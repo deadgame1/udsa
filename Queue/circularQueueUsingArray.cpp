@@ -51,10 +51,9 @@ public:
             return;
         }
         int i=(front+1)%size;
-        while(i!=front)
+        while(i!=(rear+1)%size)
         {
-            if(Q[i])
-                cout<<Q[i]<<" ";
+            cout<<Q[i]<<" ";
             i=(i+1)%size;
         }
         cout<<endl;
@@ -95,9 +94,8 @@ int main()
     myQ.enqueue(7);
     myQ.dequeue();
     myQ.dequeue();
-    myQ.dequeue();
     myQ.enqueue(11);
-    myQ.enqueue(13);
+    //myQ.enqueue(13);
     myQ.display();
 
     return 0;
