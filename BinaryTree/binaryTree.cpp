@@ -74,6 +74,7 @@ public:
     };   
     void iterativePreOrder(); 
     void iterativeInOrder(); 
+    void iterativeLevelOrder();
     //void recursivePostOrder(); 
 };
 
@@ -121,6 +122,53 @@ void BinaryTree<T1>::iterativeInOrder()
     }
 }
 
+template <class T1>
+void BinaryTree<T1>::iterativeLevelOrder()
+{
+    TreeNode<T1>* p = root;
+    TreeNode<T1>* t;
+    QueueLL<TreeNode<T1>*> qu = QueueLL<TreeNode<T1>*>();
+    qu.enqueue(p);
+    while(!qu.isEmpty())
+    {
+        p=qu.dequeue();
+        cout<<p->data<<" ";
+        if(p->lchild)
+        {
+            qu.enqueue(p->lchild);
+        }
+        if(p->rchild)
+        {
+            qu.enqueue(p->rchild);
+        }
+    }
+}
+
+int main()
+{
+    BinaryTree<int> myTree = BinaryTree<int>();
+    myTree.createTree();
+
+    // myTree.preOrder(myTree.root);
+    // cout<<endl;
+
+    myTree.iterativePreOrder();
+    cout<<endl;
+
+    myTree.iterativeLevelOrder();
+    cout<<endl;
+
+    // myTree.recursivePostOrder();
+    // cout<<endl;
+
+    // myTree.postOrder(myTree.root);
+    // cout<<endl;
+    // myTree.inOrder(myTree.root);
+    // cout<<endl;
+
+    return 0;
+}
+
 // template <class T1>
 // void BinaryTree<T1>::recursivePostOrder()
 // {
@@ -153,28 +201,3 @@ void BinaryTree<T1>::iterativeInOrder()
 //         }   
 //     }
 // }
-
-int main()
-{
-    BinaryTree<int> myTree = BinaryTree<int>();
-    myTree.createTree();
-
-    // myTree.preOrder(myTree.root);
-    // cout<<endl;
-
-    myTree.iterativePreOrder();
-    cout<<endl;
-
-    myTree.iterativeInOrder();
-    cout<<endl;
-
-    // myTree.recursivePostOrder();
-    // cout<<endl;
-
-    // myTree.postOrder(myTree.root);
-    // cout<<endl;
-    // myTree.inOrder(myTree.root);
-    // cout<<endl;
-
-    return 0;
-}
