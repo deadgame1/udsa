@@ -72,13 +72,13 @@ public:
             inOrder(tr->rchild);
         }        
     };   
-    void recursivePreOrder(); 
-    void recursiveInOrder(); 
-    void recursivePostOrder(); 
+    void iterativePreOrder(); 
+    void iterativeInOrder(); 
+    //void recursivePostOrder(); 
 };
 
 template <class T1>
-void BinaryTree<T1>::recursivePreOrder()
+void BinaryTree<T1>::iterativePreOrder()
 {
     stackLL<TreeNode<T1>*> stk = stackLL<TreeNode<T1>*>();
     TreeNode<T1>* p = root;
@@ -100,7 +100,7 @@ void BinaryTree<T1>::recursivePreOrder()
 }
 
 template <class T1>
-void BinaryTree<T1>::recursiveInOrder()
+void BinaryTree<T1>::iterativeInOrder()
 {
     stackLL<TreeNode<T1>*> stk = stackLL<TreeNode<T1>*>();
     TreeNode<T1>* p = root;
@@ -162,10 +162,10 @@ int main()
     // myTree.preOrder(myTree.root);
     // cout<<endl;
 
-    myTree.recursivePreOrder();
+    myTree.iterativePreOrder();
     cout<<endl;
 
-    myTree.recursiveInOrder();
+    myTree.iterativeInOrder();
     cout<<endl;
 
     // myTree.recursivePostOrder();
