@@ -13,37 +13,35 @@ public:
     {
         T1 input;
         root=new TreeNode<T1>();
-        TreeNode<T1>** temp;
-        TreeNode<T1>** p;
-        QueueLL<TreeNode<T1>**> q = QueueLL<TreeNode<T1>**>();
+        TreeNode<T1>* temp;
+        TreeNode<T1>* p;
+        QueueLL<TreeNode<T1>*> q = QueueLL<TreeNode<T1>*>();
         cout<<"Enter root data "<<endl;
         cin>>input;
         root->data=input;
         root->lchild=root->rchild=NULL;
-        q.enqueue(&root);
+        q.enqueue(root);
         while (!q.isEmpty())
         {
             p=q.dequeue();
-            cout<<"Enter Left child of - "<<(*p)->data<<endl;
+            cout<<"Enter Left child of - "<<p->data<<endl;
             cin>>input;
             if(input!=-1)
             {
-                temp=new TreeNode<T1>*(); //this is the address of TreeNode, Tree Node itself is a pointer. so temp becomes a double ptr
-                *temp=new TreeNode<T1>(); // this is the actual tree node. //we have to store the address of this pointer type node in Queue.
-                (*temp)->data=input;
-                (*temp)->lchild=(*temp)->rchild=NULL;
-                (*p)->lchild=(*temp);
+                temp=new TreeNode<T1>(); 
+                temp->data=input;
+                temp->lchild=temp->rchild=NULL;
+                p->lchild=temp;
                 q.enqueue(temp);
             }
-            cout<<"Enter Right child of - "<<(*p)->data<<endl;
+            cout<<"Enter Right child of - "<<p->data<<endl;
             cin>>input;
             if(input!=-1)
             {
-                temp=new TreeNode<T1>*();
-                *temp=new TreeNode<T1>();
-                (*temp)->data=input;
-                (*temp)->lchild=(*temp)->rchild=NULL;
-                (*p)->rchild=(*temp);
+                temp=new TreeNode<T1>();
+                temp->data=input;
+                temp->lchild=temp->rchild=NULL;
+                p->rchild=temp;
                 q.enqueue(temp);
             }
         }
@@ -78,28 +76,6 @@ public:
     void recursiveInOrder(); 
     void recursivePostOrder(); 
 };
-
-// template <class T1>
-// void BinaryTree<T1>::recursivePreOrder()
-// {
-//     stackLL<TreeNode<T1>**> stk = stackLL<TreeNode<T1>**>();
-//     TreeNode<T1>** p = &root;
-//     TreeNode<T1>** temp;
-//     while(*p || !stk.isEmpty())
-//     {
-//         if(*p)
-//         {
-//             cout<<(*p)->data<<" ";
-//             stk.push(p);
-//             p=&((*p)->lchild);
-//         }
-//         else
-//         {
-//             temp=stk.pop();
-//             p=&((*temp)->rchild);
-//         }   
-//     }
-// }
 
 template <class T1>
 void BinaryTree<T1>::recursivePreOrder()
@@ -145,6 +121,39 @@ void BinaryTree<T1>::recursiveInOrder()
     }
 }
 
+// template <class T1>
+// void BinaryTree<T1>::recursivePostOrder()
+// {
+//     stackLL<TreeNode<T1>*> stk = stackLL<TreeNode<T1>*>();
+//     TreeNode<T1>* p = root;
+//     TreeNode<T1>* temp;
+//     int x;
+//     while(p || !stk.isEmpty())
+//     {
+//         if(p)
+//         {
+//             stk.push(p);
+//             p=p->lchild;
+//         }
+//         else
+//         {
+//             temp=stk.pop();
+//             if(temp > 0)
+//             {
+//                 x = -(int)temp;
+//                 stk.push(x);
+//                 p=temp->rchild;
+//             }
+//             else
+//             {
+//                 temp = (TreeNode<T1>*) temp;
+//                 cout<<temp->data<<" ";
+//                 p=NULL;
+//             }
+//         }   
+//     }
+// }
+
 int main()
 {
     BinaryTree<int> myTree = BinaryTree<int>();
@@ -158,6 +167,9 @@ int main()
 
     myTree.recursiveInOrder();
     cout<<endl;
+
+    // myTree.recursivePostOrder();
+    // cout<<endl;
 
     // myTree.postOrder(myTree.root);
     // cout<<endl;
