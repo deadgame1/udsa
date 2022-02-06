@@ -1,5 +1,6 @@
 #include <iostream>
 #include "queue.h"
+#include "stack.h"
 
 using namespace std;
 
@@ -72,20 +73,72 @@ public:
             cout<<tr->data<<" ";
             inOrder(tr->rchild);
         }        
-    };    
+    };   
+    void recursivePreOrder(); 
+    void recursiveInOrder(); 
+    void recursivePostOrder(); 
 };
+
+// template <class T1>
+// void BinaryTree<T1>::recursivePreOrder()
+// {
+//     stackLL<TreeNode<T1>**> stk = stackLL<TreeNode<T1>**>();
+//     TreeNode<T1>** p = &root;
+//     TreeNode<T1>** temp;
+//     while(*p || !stk.isEmpty())
+//     {
+//         if(*p)
+//         {
+//             cout<<(*p)->data<<" ";
+//             stk.push(p);
+//             p=&((*p)->lchild);
+//         }
+//         else
+//         {
+//             temp=stk.pop();
+//             p=&((*temp)->rchild);
+//         }   
+//     }
+// }
+
+template <class T1>
+void BinaryTree<T1>::recursivePreOrder()
+{
+    stackLL<TreeNode<T1>*> stk = stackLL<TreeNode<T1>*>();
+    TreeNode<T1>* p = root;
+    TreeNode<T1>* temp;
+    while(p || !stk.isEmpty())
+    {
+        if(p)
+        {
+            cout<<p->data<<" ";
+            stk.push(p);
+            p=p->lchild;
+        }
+        else
+        {
+            temp=stk.pop();
+            p=temp->rchild;
+        }   
+    }
+}
 
 int main()
 {
     BinaryTree<int> myTree = BinaryTree<int>();
     myTree.createTree();
 
-    myTree.preOrder(myTree.root);
+    // myTree.preOrder(myTree.root);
+    // cout<<endl;
+
+    myTree.recursivePreOrder();
     cout<<endl;
-    myTree.postOrder(myTree.root);
-    cout<<endl;
-    myTree.inOrder(myTree.root);
-    cout<<endl;
+
+
+    // myTree.postOrder(myTree.root);
+    // cout<<endl;
+    // myTree.inOrder(myTree.root);
+    // cout<<endl;
 
     return 0;
 }
