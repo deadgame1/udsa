@@ -75,7 +75,21 @@ public:
     void iterativePreOrder(); 
     void iterativeInOrder(); 
     void iterativeLevelOrder();
+    int count(TreeNode<T1>* p);
     //void recursivePostOrder(); 
+};
+
+template <class T1>
+int BinaryTree<T1>::count(TreeNode<T1>* p)
+{
+    int x,y;
+    if(p)
+    {
+        x=count(p->lchild);
+        y=count(p->rchild);
+        return x+y+1;
+    }
+    return 0;
 };
 
 template <class T1>
@@ -155,8 +169,10 @@ int main()
     myTree.iterativePreOrder();
     cout<<endl;
 
-    myTree.iterativeLevelOrder();
-    cout<<endl;
+    cout<<"Count - "<<myTree.count(myTree.root)<<endl;
+
+    // myTree.iterativeLevelOrder();
+    // cout<<endl;
 
     // myTree.recursivePostOrder();
     // cout<<endl;
