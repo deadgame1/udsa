@@ -78,8 +78,30 @@ public:
     int count(TreeNode<T1>* p);
     int countLeafNodes(TreeNode<T1>* p);
     int countNodesWithDegree2(TreeNode<T1>* p);
+    int height(TreeNode<T1>* p);
     //void recursivePostOrder(); 
 };
+
+/**
+ * @brief should be levels actually, and not height since height starts from 1
+ * 
+ * @tparam T1 
+ * @param p 
+ * @return int 
+ */
+template <class T1>
+int BinaryTree<T1>::height(TreeNode<T1>* p)
+{
+    int x,y;
+    if(!p)  return 0;
+    x=height(p->lchild);
+    y=height(p->rchild);
+    if(x>y)
+        return x+1;
+    else    
+        return y+1;
+    
+}
 
 template <class T1>
 int BinaryTree<T1>::count(TreeNode<T1>* p)
@@ -209,7 +231,7 @@ int main()
     myTree.iterativePreOrder();
     cout<<endl;
 
-    cout<<"Count - "<<myTree.countNodesWithDegree2(myTree.root)<<endl;
+    cout<<"Count - "<<myTree.height(myTree.root)<<endl;
 
     // myTree.iterativeLevelOrder();
     // cout<<endl;
