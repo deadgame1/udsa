@@ -72,7 +72,18 @@ public:
                 p=p->rchild;
         }
         return NULL;
-    }
+    };
+    TreeNode<T>* Rsearch(TreeNode<T>* p, T key)
+    {   
+        if(p==NULL)
+            return NULL; //Not found
+        if(key==p->data)
+            return p;
+        if(key<p->data)
+            Rsearch(p->lchild,key);
+        else    
+            Rsearch(p->rchild,key);
+    };
 };
 
 int main()
@@ -87,8 +98,8 @@ int main()
 
     myBST.inOrder(myBST.root);
     cout<<endl;
-    int x = 60;
-    if(myBST.search(x)==NULL)
+    int x = 40;
+    if(myBST.Rsearch(myBST.root,x)==NULL)
         cout<<"element not found"<<endl;
     else    
         cout<<"element found - "<<x<<endl;
