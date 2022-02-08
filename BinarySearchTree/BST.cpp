@@ -58,6 +58,20 @@ public:
             cout<<p->data<<" ";
             inOrder(p->rchild);
         }
+    };
+    TreeNode<T>* search(T key)
+    {
+        TreeNode<T>* p=root;
+        while(p)
+        {
+            if(key==p->data)
+                return p;
+            else if(key<p->data)
+                p=p->lchild;
+            else    
+                p=p->rchild;
+        }
+        return NULL;
     }
 };
 
@@ -72,6 +86,13 @@ int main()
     myBST.insert(60);
 
     myBST.inOrder(myBST.root);
+    cout<<endl;
+    int x = 60;
+    if(myBST.search(x)==NULL)
+        cout<<"element not found"<<endl;
+    else    
+        cout<<"element found - "<<x<<endl;
+        
 
     return 0;
 }
