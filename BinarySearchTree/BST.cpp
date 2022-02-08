@@ -84,17 +84,36 @@ public:
         else    
             Rsearch(p->rchild,key);
     };
+    TreeNode<T>* Rinsert(TreeNode<T>* p, T key)
+    {
+        TreeNode<T>* t;
+        if(p==NULL)
+        {
+            t=new TreeNode<T>();
+            t->data=key;
+            t->lchild=t->rchild=NULL;
+            if(root==NULL)  
+                root=t;
+            return t;
+        }
+        if(key<p->data)
+            p->lchild=Rinsert(p->lchild,key);
+        else if(key>p->data)
+            p->rchild=Rinsert(p->rchild,key);
+
+        return p;
+    };  
 };
 
 int main()
 {
     BST<int> myBST=BST<int>();
-    myBST.insert(30);
-    myBST.insert(10);
-    myBST.insert(20);
-    myBST.insert(40);
-    myBST.insert(50);
-    myBST.insert(60);
+    myBST.Rinsert(myBST.root,30);
+    myBST.Rinsert(myBST.root,10);
+    myBST.Rinsert(myBST.root,20);
+    myBST.Rinsert(myBST.root,40);
+    myBST.Rinsert(myBST.root,50);
+    myBST.Rinsert(myBST.root,60);
 
     myBST.inOrder(myBST.root);
     cout<<endl;
