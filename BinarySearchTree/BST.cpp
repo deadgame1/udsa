@@ -102,7 +102,62 @@ public:
             p->rchild=Rinsert(p->rchild,key);
 
         return p;
-    };  
+    }; 
+    TreeNode<T>* Delete(TreeNode<T>* p, T key) 
+    {
+        TreeNode<T>* t=NULL;
+        
+        if(!p)
+            return NULL;
+        if(!p->lchild && !p->rchild && p->data==key)
+        {
+            if(p==root)
+                root=NULL;
+            delete p;
+            return NULL;
+        }
+        if(key<p->data)
+            p->lchild=Delete(p->lchild,key);
+        else if(key>p->data)
+            p->rchild=Delete(p->rchild,key);
+        else
+        {
+            if(Height(p->lchild) > Height(p->rchild))
+            {
+                t=InPredecessor(p->lchild);
+                p->data=t->data;
+                p->lchild=Delete(p->lchild,t->data);
+            }
+            else
+            {
+                t=InSuccessor(p->rchild);
+                p->data=t->data;
+                p->rchild=Delete(p->rchild,t->data);
+            }
+        }
+        return p;
+    };
+    int Height(TreeNode<T>* p)
+    {
+        int x,y;
+        if(!p)
+            return 0;
+        x=Height(p->lchild);
+        y=Height(p->rchild);
+        return x>y?x+1:y+1;
+    };
+    TreeNode<T>* InPredecessor(TreeNode<T>* p)
+    {
+        while(p && p->rchild)
+            p=p->rchild;
+        return p;
+    };
+    TreeNode<T>* InSuccessor(TreeNode<T>* p)
+    {
+        while(p && p->lchild)
+            p=p->lchild;
+        return p;
+    };
 };
 
 int main()
@@ -117,11 +172,18 @@ int main()
 
     myBST.inOrder(myBST.root);
     cout<<endl;
-    int x = 40;
-    if(myBST.Rsearch(myBST.root,x)==NULL)
-        cout<<"element not found"<<endl;
-    else    
-        cout<<"element found - "<<x<<endl;
+
+    cout<<myBST.Height(myBST.root)<<endl;
+
+    cout<<myBST.Delete(myBST.root,60)<<endl;
+
+    cout<<myBST.Height(myBST.root)<<endl;
+
+    // int x = 40;
+    // if(myBST.Rsearch(myBST.root,x)==NULL)
+    //     cout<<"element not found"<<endl;
+    // else    
+    //     cout<<"element found - "<<x<<endl;
         
 
     return 0;
