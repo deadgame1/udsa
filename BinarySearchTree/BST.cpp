@@ -1,4 +1,5 @@
 #include <iostream>
+#include "stack.h"
 
 using namespace std;
 
@@ -158,26 +159,82 @@ public:
             p=p->lchild;
         return p;
     };
+    TreeNode<T>* generateBSTFromInorder(T *A)
+    {
+        TreeNode<T>* p=NULL; //p is root
+        stackLL<TreeNode<T>*> stk = stackLL<TreeNode<T>*>();
+        p=new TreeNode<T>();
+        p->data=A[0];
+        p->lchild=p->rchild=NULL;
+        root=p;
+        int temp;
+        int i=1;
+
+        TreeNode<T>*t, *q;//t is temporary pointer used to create nodes
+        int sizeOfInput = sizeof(A);
+        while(i<sizeOfInput)
+        {
+            t=new TreeNode<T>();
+            t->data=A[i];
+            t->lchild=t->rchild=NULL;
+            if(A[i] < p->data)
+            {
+                p->lchild=t;
+                stk.push(p);
+                p=t;
+            }
+            else
+            {//element is greater
+                if(!stk.isEmpty())
+                {
+                    q=stk.stackTop();
+                    temp=q->data;
+                }
+                else
+                {
+                    temp=__INT_MAX__;
+                }        
+                if((p->data < A[i]) && (A[i] < temp))
+                {
+                    
+                    p->rchild=t;
+                    p=t;
+                }    
+                else
+                {
+                    p=stk.pop();
+                    p->rchild=t;
+                    p=t;
+                }
+            
+            }
+            i++;
+        }
+        return p;
+    };
 };
 
 int main()
 {
     BST<int> myBST=BST<int>();
-    myBST.Rinsert(myBST.root,30);
-    myBST.Rinsert(myBST.root,10);
-    myBST.Rinsert(myBST.root,20);
-    myBST.Rinsert(myBST.root,40);
-    myBST.Rinsert(myBST.root,50);
-    myBST.Rinsert(myBST.root,60);
+    int preOrder[] = {30,20,10,15,25,40,50,45};
+    myBST.generateBSTFromInorder(preOrder);
+    //myBST.inOrder(myBST.root);
 
-    myBST.inOrder(myBST.root);
-    cout<<endl;
+    // myBST.Rinsert(myBST.root,30);
+    // myBST.Rinsert(myBST.root,10);
+    // myBST.Rinsert(myBST.root,20);
+    // myBST.Rinsert(myBST.root,40);
+    // myBST.Rinsert(myBST.root,50);
+    // myBST.Rinsert(myBST.root,60);
+    // myBST.inOrder(myBST.root);
+    // cout<<endl;
 
-    cout<<myBST.Height(myBST.root)<<endl;
+    // cout<<myBST.Height(myBST.root)<<endl;
 
-    cout<<myBST.Delete(myBST.root,60)<<endl;
+    // cout<<myBST.Delete(myBST.root,60)<<endl;
 
-    cout<<myBST.Height(myBST.root)<<endl;
+    // cout<<myBST.Height(myBST.root)<<endl;
 
     // int x = 40;
     // if(myBST.Rsearch(myBST.root,x)==NULL)
