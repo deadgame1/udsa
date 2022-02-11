@@ -219,7 +219,7 @@ int main()
     BST<int> myBST=BST<int>();
     int preOrder[] = {30,20,10,15,25,40,50,45};
     myBST.generateBSTFromInorder(preOrder);
-    //myBST.inOrder(myBST.root);
+    myBST.inOrder(myBST.root);
 
     // myBST.Rinsert(myBST.root,30);
     // myBST.Rinsert(myBST.root,10);
