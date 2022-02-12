@@ -86,19 +86,22 @@ public:
     };
     TreeNode<T>* RLRotation(TreeNode<T>* p)
     {
-        TreeNode<T>* pl=p->lchild;
-        TreeNode<T>* plr=pl->rchild;
+        TreeNode<T>* pr=p->rchild;
+        TreeNode<T>* prl=pr->lchild;
 
-        pl->rchild=p;
-        p->lchild=plr;
+        pr->lchild=prl->rchild;
+        p->rchild=prl->lchild;
+        prl->rchild=pr;
+        prl->lchild=p;
 
-        pl->height=NodeHeight(pl);
         p->height=NodeHeight(p);
+        pr->height=NodeHeight(pr);
+        prl->height=NodeHeight(prl);
 
         if(root==p)
-            root=pl;
+            root=prl;
 
-        return pl;
+        return prl;
     };
     TreeNode<T>* insert(T key, TreeNode<T>* p)
     {
@@ -136,7 +139,7 @@ int main()
     AVL<int> myAvl=AVL<int>();
     myAvl.root = myAvl.insert(10,myAvl.root);
     myAvl.insert(20, myAvl.root);
-    myAvl.insert(30, myAvl.root);
+    myAvl.insert(15, myAvl.root);
 
     return 0;
 }
