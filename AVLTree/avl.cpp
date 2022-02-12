@@ -132,14 +132,79 @@ public:
             return RLRotation(p);
         return p;
     };
+    TreeNode<T>* InPredecessor(TreeNode<T>* p)
+    {
+        while(p && p->rchild)
+            p=p->rchild;
+        return p;
+    };
+    TreeNode<T>* InSuccessor(TreeNode<T>* p)
+    {
+        while(p && p->lchild)
+            p=p->lchild;
+        return p;
+    };
+    TreeNode<T>* Delete(TreeNode<T>* p, T key) 
+    {
+        TreeNode<T>* t=NULL;
+        
+        if(!p)
+            return NULL;
+        if(!p->lchild && !p->rchild && p->data==key)
+        {
+            if(p==root)
+                root=NULL;
+            delete p;
+            return NULL;
+        }
+        if(key<p->data)
+            p->lchild=Delete(p->lchild,key);
+        else if(key>p->data)
+            p->rchild=Delete(p->rchild,key);
+        else
+        {
+            if(NodeHeight(p->lchild) > NodeHeight(p->rchild))
+            {
+                t=InPredecessor(p->lchild);
+                p->data=t->data;
+                p->lchild=Delete(p->lchild,t->data);
+            }
+            else
+            {
+                t=InSuccessor(p->rchild);
+                p->data=t->data;
+                p->rchild=Delete(p->rchild,t->data);
+            }
+        }
+
+        //new Height after deleteion
+        p->height=NodeHeight(p);
+        if(BalanceFactor(p)==2 &&  BalanceFactor(p->lchild)==1) //L1
+            return LLRotation(p);
+        else if(BalanceFactor(p)==2 &&  BalanceFactor(p->lchild)==-1) //L-1
+            return LRRotation(p);
+        else if(BalanceFactor(p)==-2 &&  BalanceFactor(p->rchild)==-1) //R-1
+            return RRRotation(p);
+        else if(BalanceFactor(p)==-2 &&  BalanceFactor(p->rchild)==1) //R1
+            return RLRotation(p);
+        else if(BalanceFactor(p)==2 &&  BalanceFactor(p->rchild)==0) //L0 rotation
+            return LLRotation(p);
+        else if(BalanceFactor(p)==-2 &&  BalanceFactor(p->rchild)==0) //RO rotation
+            return RRRotation(p);
+
+        return p;
+    };
 };
 
 int main()
 {
     AVL<int> myAvl=AVL<int>();
-    myAvl.root = myAvl.insert(10,myAvl.root);
+    myAvl.root = myAvl.insert(30,myAvl.root);
     myAvl.insert(20, myAvl.root);
-    myAvl.insert(15, myAvl.root);
+    myAvl.insert(10, myAvl.root);
+    myAvl.insert(40, myAvl.root);
+
+    myAvl.Delete(myAvl.root,40);
 
     return 0;
 }
