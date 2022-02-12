@@ -70,19 +70,19 @@ public:
     };
     TreeNode<T>* RRRotation(TreeNode<T>* p)
     {
-        TreeNode<T>* pl=p->lchild;
-        TreeNode<T>* plr=pl->rchild;
+        TreeNode<T>* pr=p->rchild;
+        TreeNode<T>* prr=pr->rchild;
 
-        pl->rchild=p;
-        p->lchild=plr;
+        pr->lchild=p;
+        pr->rchild=prr;
 
-        pl->height=NodeHeight(pl);
         p->height=NodeHeight(p);
+        pr->height=NodeHeight(pr);
 
         if(root==p)
-            root=pl;
+            root=pr;
 
-        return pl;
+        return pr;
     };
     TreeNode<T>* RLRotation(TreeNode<T>* p)
     {
@@ -123,9 +123,9 @@ public:
             return LLRotation(p);
         else if(BalanceFactor(p)==2 &&  BalanceFactor(p->lchild)==-1)
             return LRRotation(p);
-        else if(BalanceFactor(p)==-2 &&  BalanceFactor(p->lchild)==-1)
+        else if(BalanceFactor(p)==-2 &&  BalanceFactor(p->rchild)==-1)
             return RRRotation(p);
-        else if(BalanceFactor(p)==-2 &&  BalanceFactor(p->lchild)==1)
+        else if(BalanceFactor(p)==-2 &&  BalanceFactor(p->rchild)==1)
             return RLRotation(p);
         return p;
     };
@@ -135,8 +135,8 @@ int main()
 {
     AVL<int> myAvl=AVL<int>();
     myAvl.root = myAvl.insert(10,myAvl.root);
-    myAvl.insert(5, myAvl.root);
-    myAvl.insert(2, myAvl.root);
+    myAvl.insert(20, myAvl.root);
+    myAvl.insert(30, myAvl.root);
 
     return 0;
 }
