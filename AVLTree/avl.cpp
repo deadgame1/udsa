@@ -54,16 +54,19 @@ public:
         TreeNode<T>* pl=p->lchild;
         TreeNode<T>* plr=pl->rchild;
 
-        pl->rchild=p;
-        p->lchild=plr;
+        pl->rchild=plr->lchild;
+        p->lchild=plr->rchild;
+        plr->rchild=p;
+        plr->lchild=pl;
 
-        pl->height=NodeHeight(pl);
         p->height=NodeHeight(p);
+        pl->height=NodeHeight(pl);
+        plr->height=NodeHeight(plr);
 
         if(root==p)
-            root=pl;
+            root=plr;
 
-        return pl;
+        return plr;
     };
     TreeNode<T>* RRRotation(TreeNode<T>* p)
     {
