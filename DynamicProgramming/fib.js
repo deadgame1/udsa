@@ -1,11 +1,6 @@
 function fib(n, memo={}){
-    if(n in memo){
-        return memo[n];
-    }
-    if(n<=2){
-        memo[n]=1;
-        return 1;
-    }
+    if(n in memo) return memo[n];
+    if(n<=2) return 1;
 
     let x = fib(n-2,memo)+fib(n-1,memo);
     memo[n] = x;
