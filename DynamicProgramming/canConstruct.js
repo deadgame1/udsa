@@ -27,12 +27,14 @@ function canConstruct(target, wordBank, memo={}){
 /**
 m=target.length, n= wordBank.length
 Brute Force
-time : O(n^m) // tree heigh maximum of m, and branching factor is n, so n^m maximum nodes in a tree
-space : O(m) //at any given point max number of stack frames in stack can be m
+time : O(n^m * m) // tree heigh maximum of m, and branching factor is n, so n^m maximum nodes in a tree, + slice operation in
+each iteration of a string of max length m, so multiply by m.
+space : O(m^2) //at any given point max number of stack frames in stack can be m, i.e height of the tree. also in each recursive call we 
+are maintain a suffix variable of length m. so m^m
 
 Memoized
-time: O(mn)
-space: O(m)
+time: O(n*m^2)  //second m is coming from slice which is still there
+space: O(m^2)
 */
 
 console.log(canConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd"])); // true
