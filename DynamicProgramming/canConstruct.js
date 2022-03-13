@@ -9,14 +9,15 @@ You may reuse elements of `wordBank as many times as needed.
 
 function canConstruct(target, wordBank, memo={}){
     if(target in memo) return memo[target];
-    if(target.length === 0) return true;
+    if(!target) return true;
     
     for(let word of wordBank){
         if(target.indexOf(word) === 0){
-            let slicedTarget = target.slice(word.length);
-            let result = canConstruct(slicedTarget,wordBank);
-            memo[target] = result;
-            return result;
+            let suffix = target.slice(word.length);
+            if(canConstruct(suffix,wordBank,memo) == true){
+                memo[target] = true;
+                return true;
+            } 
         }
     }
 
@@ -34,4 +35,13 @@ time: O(mn)
 space: O(m)
 */
 
-console.log(canConstruct('abcdef',['abc','def','efg']));
+console.log(canConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd"])); // true
+console.log(canConstruct("skateboard", ["bo", "rd", "ate", "t", "ska", "sk", "boar"])); // false
+console.log(canConstruct("enterapotentpot", ["a", "p", "ent", "enter", "ot", "o", "t"])); // true
+console.log(canConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", [
+  "ee",
+  "eee",
+  "eeee",
+  "eeeee",
+  "eeeeee",
+])); //false
