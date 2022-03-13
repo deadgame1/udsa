@@ -33,7 +33,7 @@ space : O(m^2) //at any given point max number of stack frames in stack can be m
 are maintain a suffix variable of length m. so m^m
 
 Memoized
-time: O(n*m^2)  //second m is coming from slice which is still there
+time: O(n*m^2)  //second m is coming from slice fn which is still there
 space: O(m^2)
 */
 
