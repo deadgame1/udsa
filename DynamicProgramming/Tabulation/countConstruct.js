@@ -30,14 +30,14 @@ function countConstruct(target, wordBank){
  * Space - O(m)
  */
 
-console.log(countConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd","ef"])); // true
-console.log(countConstruct("skateboard", ["bo", "rd", "ate", "t", "ska", "sk", "boar"])); // false
-console.log(countConstruct("enterapotentpot", ["a", "p", "ent", "enter", "ot", "o", "t"])); // true
-console.log(countConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", [
-  "e",
-  "ee",
-  "eee",
-  "eeee",
-  "eeeee",
-  "eeeeee",
-])); // false
+ console.log(countConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl'])); // 2
+ console.log(countConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd" ])); // 1
+ console.log(countConstruct("skateboard", ["bo", "rd", "ate", "t", "ska", "sk", "boar"])); // 0
+ console.log(countConstruct("enterapotentpot", ["a", "p", "ent", "enter", "ot", "o", "t"])); // 4
+ console.log(countConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", [
+    "ee",
+    "eee",
+    "ееее",
+    "eееее",
+    "eеееее",
+ ])); // 0
