@@ -27,6 +27,11 @@ function allConstruct(target, wordBank, memo={}){
     return combinations;
 }
 
+/**
+ * Brute Force :
+ * Time - 
+ * Space -
+ */
 console.log(allConstruct("purple",["purp","p","ur","le","purpl"]));
 console.log(allConstruct("abcdef", [ "ab", "abc", "cd", "def", "abcd", "ef", "c"]));
 console.log(allConstruct("skateboard", ["bo", "rd", "ate", "t", "ska", "sk", "boar"])); //[]
