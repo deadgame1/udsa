@@ -29,8 +29,8 @@ function allConstruct(target, wordBank, memo={}){
 
 /**
  * Brute Force :
- * Time - 
- * Space -
+ * Time - O(n^m)   // additional factors of m can be there, but its already exponential so it wont affect
+ * Space - O(m)   // no of stack frames
  */
 console.log(allConstruct("purple",["purp","p","ur","le","purpl"]));
 console.log(allConstruct("abcdef", [ "ab", "abc", "cd", "def", "abcd", "ef", "c"]));
