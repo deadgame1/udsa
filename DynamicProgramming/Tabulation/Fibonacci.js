@@ -12,8 +12,8 @@ function fib(n){
     const array = Array(n+1);
     array.fill(0);
     array[1]=1;
-    //array.map((k)=>console.log(k));
-    for(let i=0;i<n;i++){
+    
+    for(let i=0;i<=n;i++){
         array[i+1] += array[i];
         array[i+2] += array[i]; 
     }
