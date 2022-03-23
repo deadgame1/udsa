@@ -66,9 +66,7 @@ public:
                 j = 2*i;
             }
             else
-            {
                 break;
-            }
         }
         cout<<temp<<" deleted"<<endl;
         A[tail+1] = temp; //storing deleted element
@@ -84,8 +82,8 @@ public:
 
 int main()
 {
-    int A[] = {15,5,20,30,60,10,25,45};
-    MaxHeap<int> myHeap = MaxHeap<int>(8,A);
+    int myArr[] = {15,5,20,30,60,10,25,45};
+    MaxHeap<int> myHeap = MaxHeap<int>(8,myArr);
 
     for(int i=1;i<myHeap.size;i++)
     {
@@ -93,8 +91,11 @@ int main()
     }
     cout<<endl;
 
-    myHeap.deleteInHeap();
-
+    for(int j=0;j<=sizeof(myArr)/sizeof(myArr[0]);j++)
+    {
+        myHeap.deleteInHeap();
+    }
+    
     for(int i=1;i<myHeap.size;i++)
     {
         cout<<myHeap.A[i]<<" ";
