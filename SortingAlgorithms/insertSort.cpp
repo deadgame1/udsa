@@ -2,6 +2,15 @@
 
 using namespace std;
 
+/**
+ * @brief Insertion sort
+ * Time complexity - 
+ * Max - O(n^2)
+ * Min - O(n)
+ * It is Adaptive by nature and stable.
+ * works best with linked list
+ * @return int 
+ */
 int main(){
     int A[10] = {9,8,7,6,5,4,3,2,1,0};
     int x,j;
