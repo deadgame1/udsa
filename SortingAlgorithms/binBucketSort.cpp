@@ -61,7 +61,8 @@ void binBucketSort(int list[], int sizeOfList){
             //pop out elements in FIFO fashion
             do{
                 cout<<auxArray[i]->key<<" ";
-            }while(auxArray[i]->next != NULL);
+                auxArray[i] = auxArray[i]->next;
+            }while(auxArray[i] != NULL);
         }
     }
 }
