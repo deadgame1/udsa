@@ -15,8 +15,6 @@ void shellSort(int list[], int sizeOfList){
 
     do{
         for(int i=0;i<sizeOfList;i++){
-            int gapNext = list[i+gap];
-            int curr = list[i];
             if(i+gap >= sizeOfList)
                 continue;
             if(list[i] < list[i+gap])
